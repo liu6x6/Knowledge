@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>对数的应用 · 初中生讲解手册</title>
+<style>
+:root{--ink:#1f2933;--blue:#1c5f96;--green:#059669;--red:#e11d48;--orange:#b45309;}
+*{box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+ color:var(--ink);max-width:960px;margin:0 auto;padding:28px 22px 80px;line-height:1.85;background:#fff;}
+h1{font-size:32px;text-align:center;margin:8px 0 4px;color:#111}
+h2{font-size:24px;margin-top:44px;padding:10px 14px;border-left:8px solid var(--blue);
+ background:linear-gradient(90deg,#eaf4ff,transparent);border-radius:4px}
+h3{font-size:19px;margin-top:28px;color:var(--blue)}
+h4{font-size:16.5px;margin-top:20px;color:var(--orange)}
+.sub{text-align:center;color:#666;margin-bottom:24px;font-size:15px}
+p,li{font-size:16px}
+table{border-collapse:collapse;margin:14px auto;font-size:15px;width:auto}
+th,td{border:1px solid #cbd5e1;padding:6px 10px;text-align:center}
+th{background:#e8f1fb;color:#123}
+tr:nth-child(even) td{background:#f8fbff}
+.logtable td{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:13px;padding:4px 7px}
+.logtable.small td{font-size:11.5px;padding:3px 5px}
+.fig{width:100%;height:auto;display:block;margin:16px auto;border:1px solid #e2e8f0;border-radius:10px}
+.box{border-radius:12px;padding:14px 18px;margin:18px 0;border:2px solid}
+.key{background:#fff7ed;border-color:#f59e0b}
+.story{background:#eff6ff;border-color:#3b82c4}
+.magic{background:#ecfdf5;border-color:#10b981}
+.warn{background:#fef2f2;border-color:#ef4444}
+.calc{background:#f8fafc;border-color:#64748b;font-family:"SF Mono",Menlo,monospace;font-size:15px;
+ padding:14px 18px;border-radius:10px;margin:14px 0;white-space:pre-wrap;line-height:2}
+.big{font-size:19px;font-weight:bold;text-align:center;color:var(--red);margin:14px 0}
+.tag{display:inline-block;background:#1c5f96;color:#fff;border-radius:999px;padding:2px 12px;font-size:13px;margin-right:6px}
+.toc{background:#f8fafc;border:1px dashed #94a3b8;border-radius:12px;padding:14px 26px;margin:22px 0}
+.toc a{color:#1c5f96;text-decoration:none}
+details{margin:10px 0;background:#f1f5f9;border-radius:8px;padding:8px 14px}
+summary{cursor:pointer;font-weight:bold;color:var(--blue)}
+.answer{color:var(--green);font-weight:bold}
+.pagebreak{page-break-before:always}
+@media print{body{padding:0;max-width:none}h2{page-break-after:avoid}table{page-break-inside:auto}.fig{max-width:100%}}
+.center{text-align:center}
+.hl{background:#fef08a;padding:0 4px;border-radius:3px}
+sup{font-size:0.72em}
+/* ---------- 动画 & 交互 ---------- */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.widget{border:2px solid #6366f1;background:#f5f6ff;border-radius:14px;padding:16px 18px;margin:20px 0}
+.widget h4{margin:0 0 4px;color:#4338ca;font-size:17px}
+.widget .hint{color:#666;font-size:13.5px;margin:2px 0 10px}
+.btn{display:inline-block;border:none;background:#4f46e5;color:#fff;border-radius:999px;padding:7px 18px;
+ font-size:14.5px;cursor:pointer;margin:4px 6px 4px 0;transition:transform .15s,background .2s;font-family:inherit}
+.btn:hover{background:#4338ca;transform:translateY(-1px)}
+.btn.ghost{background:#e0e7ff;color:#3730a3}
+.btn:active{transform:scale(.96)}
+.readout{font-family:"SF Mono",Menlo,monospace;font-size:17px;background:#fff;border:1px solid #c7d2fe;
+ border-radius:10px;padding:8px 14px;margin:10px 0;display:inline-block;min-width:260px}
+.readout b{color:#e11d48}
+.calc .st{opacity:0;transform:translateX(-14px);transition:opacity .55s ease,transform .55s ease}
+.calc .st.on{opacity:1;transform:none}
+.calc .st.cur{background:#fef9c3;box-shadow:0 0 0 3px #fde047;border-radius:6px}
+input[type=range]{width:230px;vertical-align:middle;accent-color:#4f46e5}
+input[type=number]{font-family:"SF Mono",Menlo,monospace;font-size:16px;padding:5px 8px;border:1px solid #c7d2fe;
+ border-radius:8px;width:120px}
+.logtable td.hit{background:#fde047 !important;outline:3px solid #f59e0b;font-weight:bold}
+.logtable td{transition:background .3s}
+.pop{animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.drawline{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 1.6s ease .2s}
+.drawline.in{stroke-dashoffset:0}
+@media print{.widget,.btn{display:none}.calc .st{opacity:1;transform:none}.rv{opacity:1;transform:none}}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}.calc .st{opacity:1;transform:none}.widget{display:none}</style></noscript>
+</head><body>
+
+<h1>对数的应用</h1>
+<p class="sub">—— 用「加法」做「乘法」的魔法 ｜ 初中生也能听懂的图文手册 ——</p>
+<p class="center" style="font-size:14px;color:#4f46e5">🎬 本文含<b>交互动画</b>：请用浏览器打开（双击文件即可），
+拖动滑块、点“播放”按钮玩一玩；⌘+P 打印时会自动变成干净的静态版。</p>
+
+<div class="toc">
+<b>目录</b>
+<ol>
+<li><a href="#c1">故事：400 年前的“算不动”</a></li>
+<li><a href="#c2">复习指数：对数就是“第几格”</a></li>
+<li><a href="#c3">核心魔法：加法 ⇄ 乘法</a></li>
+<li><a href="#c4">减法 ⇄ 除法</a></li>
+<li><a href="#c5">乘方与开方：把 ×n 变成 ×n</a></li>
+<li><a href="#c6">对数表长什么样、怎么查</a></li>
+<li><a href="#c7">实战三题：算 347×86、1024÷32、√150</a></li>
+<li><a href="#c8">计算尺：把对数刻在木头上</a></li>
+<li><a href="#c9">生活中的对数：分贝、地震、pH、音阶</a></li>
+<li><a href="#c10">课堂练习（含答案）</a></li>
+<li><a href="#c11">给讲解者的“口径”与常见误区</a></li>
+<li><a href="#c12">附录：完整常用对数表</a></li>
+</ol>
+</div>
+
+<h2 id="c1">一、故事：400 年前的“算不动”</h2>
+<div class="box story">
+<p>在<b>没有计算器、没有电脑</b>的年代，天文学家要算这样的式子：</p>
+<p class="big">3 4 7 × 8 6 = ?&#160;&#160;&#160;&#160;1 2 3 4 5 × 6 7 8 9 = ?</p>
+<p>开普勒（研究行星运动的那位）每天都要算几个小时的乘法，手算又慢又容易错。</p>
+<p>1614 年，苏格兰人 <b>纳皮尔（John Napier）</b> 发明了一样东西，把“乘除法”变成了“加减法”。
+拉普拉斯后来说：</p>
+<p class="big">“它（对数）把一个天文学家的寿命延长了一倍。”</p>
+<p>这个发明就是——<b>对数（logarithm）</b>。今天我们就来讲清它到底神奇在哪。</p>
+</div>
+
+<h2 id="c2">二、复习指数：对数就是“第几格”</h2>
+<p>先看一张表：从 1 开始，每次<b>×2</b>，我们把它排成一排格子：</p>
+
+<svg viewBox="0 0 780 330" xmlns="http://www.w3.org/2000/svg" class="fig">
+<rect width="780" height="330" fill="#fffdf7"/>
+<text x="50" y="26" font-size="16" font-weight="bold" fill="#1c5f96">① 普通尺子（等距刻度）：数字越来越大，1、2、4、8 全挤在左边</text>
+<line x1="50" y1="76" x2="740" y2="76" stroke="#333" stroke-width="3"/>
+<circle cx="60.7812" cy="76" r="7" fill="#e11d48"/>
+<text x="60.7812" y="62" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">1</text>
+<line x1="60.7812" y1="83" x2="60.7812" y2="94" stroke="#999"/>
+<circle cx="71.5625" cy="76" r="7" fill="#e11d48"/>
+<text x="71.5625" y="44" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">2</text>
+<line x1="71.5625" y1="83" x2="71.5625" y2="94" stroke="#999"/>
+<circle cx="93.125" cy="76" r="7" fill="#e11d48"/>
+<text x="93.125" y="62" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">4</text>
+<line x1="93.125" y1="83" x2="93.125" y2="94" stroke="#999"/>
+<circle cx="136.25" cy="76" r="7" fill="#e11d48"/>
+<text x="136.25" y="44" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">8</text>
+<line x1="136.25" y1="83" x2="136.25" y2="94" stroke="#999"/>
+<circle cx="222.5" cy="76" r="7" fill="#e11d48"/>
+<text x="222.5" y="62" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">16</text>
+<line x1="222.5" y1="83" x2="222.5" y2="94" stroke="#999"/>
+<circle cx="395" cy="76" r="7" fill="#e11d48"/>
+<text x="395" y="44" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">32</text>
+<line x1="395" y1="83" x2="395" y2="94" stroke="#999"/>
+<circle cx="740" cy="76" r="7" fill="#e11d48"/>
+<text x="740" y="62" font-size="14" text-anchor="middle" fill="#123" font-weight="bold">64</text>
+<line x1="740" y1="83" x2="740" y2="94" stroke="#999"/>
+<text x="50" y="112" font-size="13" fill="#e11d48" font-weight="bold">间距完全不相等 —— 看不出任何规律 😵</text>
+<text x="50" y="152" font-size="16" font-weight="bold" fill="#059669">② 对数尺子（间距 = 走了几格）：每翻一倍就走同样长的一格 ⇒ 完全均匀！</text>
+<line x1="50" y1="212" x2="740" y2="212" stroke="#333" stroke-width="3"/>
+<circle cx="50" cy="212" r="7" fill="#059669"/>
+<text x="50" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">1</text>
+<line x1="50" y1="219" x2="50" y2="231" stroke="#999"/>
+<text x="50" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">0</tspan></text>
+<text x="50" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 0 格</text>
+<line x1="50" y1="288" x2="165" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="50" y1="283" x2="50" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="165" y1="283" x2="165" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="107.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="165" cy="212" r="7" fill="#059669"/>
+<text x="165" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">2</text>
+<line x1="165" y1="219" x2="165" y2="231" stroke="#999"/>
+<text x="165" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">1</tspan></text>
+<text x="165" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 1 格</text>
+<line x1="165" y1="288" x2="280" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="165" y1="283" x2="165" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="280" y1="283" x2="280" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="222.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="280" cy="212" r="7" fill="#059669"/>
+<text x="280" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">4</text>
+<line x1="280" y1="219" x2="280" y2="231" stroke="#999"/>
+<text x="280" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">2</tspan></text>
+<text x="280" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 2 格</text>
+<line x1="280" y1="288" x2="395" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="280" y1="283" x2="280" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="395" y1="283" x2="395" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="337.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="395" cy="212" r="7" fill="#059669"/>
+<text x="395" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">8</text>
+<line x1="395" y1="219" x2="395" y2="231" stroke="#999"/>
+<text x="395" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">3</tspan></text>
+<text x="395" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 3 格</text>
+<line x1="395" y1="288" x2="510" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="395" y1="283" x2="395" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="510" y1="283" x2="510" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="452.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="510" cy="212" r="7" fill="#059669"/>
+<text x="510" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">16</text>
+<line x1="510" y1="219" x2="510" y2="231" stroke="#999"/>
+<text x="510" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">4</tspan></text>
+<text x="510" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 4 格</text>
+<line x1="510" y1="288" x2="625" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="510" y1="283" x2="510" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="625" y1="283" x2="625" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="567.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="625" cy="212" r="7" fill="#059669"/>
+<text x="625" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">32</text>
+<line x1="625" y1="219" x2="625" y2="231" stroke="#999"/>
+<text x="625" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">5</tspan></text>
+<text x="625" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 5 格</text>
+<line x1="625" y1="288" x2="740" y2="288" stroke="#f59e0b" stroke-width="3"/>
+<line x1="625" y1="283" x2="625" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<line x1="740" y1="283" x2="740" y2="293" stroke="#f59e0b" stroke-width="3"/>
+<text x="682.5" y="309" font-size="12" text-anchor="middle" fill="#b45309">+1 格（每段等长）</text>
+<circle cx="740" cy="212" r="7" fill="#059669"/>
+<text x="740" y="197" font-size="15" text-anchor="middle" fill="#123" font-weight="bold">64</text>
+<line x1="740" y1="219" x2="740" y2="231" stroke="#999"/>
+<text x="740" y="250" font-size="14" text-anchor="middle" fill="#059669" font-weight="bold">2<tspan baseline-shift="super" font-size="10">6</tspan></text>
+<text x="740" y="269" font-size="12" text-anchor="middle" fill="#777">log₂ = 6 格</text>
+</svg>
+
+<p>上面这条普通尺子上，数字 1、2、4、8、16… 越挤越紧；
+但下面这条尺子，我们把“<b>乘了几次 2</b>”当作距离来画，它们就<b>完美等距</b>了。</p>
+
+<h3>2.1 指数表（2 的几次方）</h3>
+<table>
+<tr><th>格子编号 n</th><th>-3</th><th>-2</th><th>-1</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>10</th></tr>
+<tr><th>2 的 n 次方</th><td>1/8<br>0.125</td><td>1/4<br>0.25</td><td>1/2<br>0.5</td><td>1</td><td>2</td><td>4</td><td>8</td><td>16</td><td>32</td><td>64</td><td>1024</td></tr>
+</table>
+
+<h3>2.2 一句话定义</h3>
+<div class="box key">
+<p class="big">对数 = 指数 = “<span class="hl">走了几格</span>” = “<span class="hl">乘了几次</span>”</p>
+<p class="center">
+2<sup>3</sup> = 8 &#160;&#160;⇔&#160;&#160; log<sub>2</sub>8 = 3<br>
+<span style="color:#666">（读作：以 2 为底 8 的对数等于 3，意思就是“2 要乘 3 次才得到 8”）</span>
+</p>
+<p class="center">10<sup>2</sup> = 100 &#160;⇔&#160; log<sub>10</sub>100 = 2 &#160;&#160;｜&#160;&#160; 10<sup>3</sup> = 1000 ⇔ log<sub>10</sub>1000 = 3</p>
+<p class="center"><b>log<sub>10</sub> 特别常用，简写成 <span style="color:#e11d48">lg</span> 或直接写 log。</b>
+因为它就是我们熟悉的“10 倍、100 倍、1000 倍”。</p>
+</div>
+
+<h3>2.3 常用对数（以 10 为底）的“整格”表 —— 先记住这几行</h3>
+<table>
+<tr><th>数字 N</th><td>0.001</td><td>0.01</td><td>0.1</td><td><b>1</b></td><td>10</td><td>100</td><td>1000</td><td>10000</td><td>100000</td><td>1000000</td></tr>
+<tr><th>lg N</th><td>-3</td><td>-2</td><td>-1</td><td><b>0</b></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+<tr><th>位数规律</th><td colspan="10">1000 有 4 位数 → lg = 3.&#8230;；100 有 3 位 → 2.&#8230;；0.01 → -2。<b>整数部分 = 位数 − 1</b>（叫“首数”）</td></tr>
+</table>
+
+<h3>2.4 指数和对数是“镜子”（反运算）</h3>
+<table>
+<tr><th>问题</th><th>算式</th><th>名字</th><th>已知什么 → 求什么</th></tr>
+<tr><td>“走 2 格能到几？”</td><td>10² = 100</td><td><b style="color:#e11d48">指数</b></td><td>知道格数 → 求数字</td></tr>
+<tr><td>“到 100 要走几格？”</td><td>lg 100 = 2</td><td><b style="color:#059669">对数</b></td><td>知道数字 → 求格数</td></tr>
+</table>
+<p>它们是<b>互为反运算</b>，就像加法和减法、乘法和除法一样成对出现：<br>
+<b>10<sup>lg x</sup> = x</b>，<b>lg(10<sup>y</sup>) = y</b> —— 一来一回，回到原样。</p>
+
+<h3>2.5 对数最厉害的本事：把“巨大”压成“小巧”</h3>
+<svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" class="fig">
+<rect width="780" height="340" fill="#fffdf7"/>
+<text x="196" y="30" font-size="15" font-weight="bold" fill="#e11d48" text-anchor="middle">普通横轴：y = lg x</text>
+<text x="196" y="50" font-size="12.5" fill="#777" text-anchor="middle">曲线一头冲上天，右边全糊在一起</text>
+<line x1="62" y1="288" x2="330" y2="288" stroke="#333" stroke-width="2"/>
+<line x1="62" y1="288" x2="62" y2="60" stroke="#333" stroke-width="2"/>
+<line x1="62" y1="288" x2="330" y2="288" stroke="#e5e7eb"/>
+<text x="56" y="292" font-size="12" fill="#666" text-anchor="end">0</text>
+<line x1="62" y1="252.333" x2="330" y2="252.333" stroke="#e5e7eb"/>
+<text x="56" y="256.333" font-size="12" fill="#666" text-anchor="end">1</text>
+<line x1="62" y1="216.667" x2="330" y2="216.667" stroke="#e5e7eb"/>
+<text x="56" y="220.667" font-size="12" fill="#666" text-anchor="end">2</text>
+<line x1="62" y1="181" x2="330" y2="181" stroke="#e5e7eb"/>
+<text x="56" y="185" font-size="12" fill="#666" text-anchor="end">3</text>
+<line x1="62" y1="145.333" x2="330" y2="145.333" stroke="#e5e7eb"/>
+<text x="56" y="149.333" font-size="12" fill="#666" text-anchor="end">4</text>
+<line x1="62" y1="109.667" x2="330" y2="109.667" stroke="#e5e7eb"/>
+<text x="56" y="113.667" font-size="12" fill="#666" text-anchor="end">5</text>
+<line x1="62" y1="74" x2="330" y2="74" stroke="#e5e7eb"/>
+<text x="56" y="78" font-size="12" fill="#666" text-anchor="end">6</text>
+<text x="62" y="305" font-size="11" fill="#666" text-anchor="middle">0</text>
+<text x="129" y="305" font-size="11" fill="#666" text-anchor="middle">25万</text>
+<text x="196" y="305" font-size="11" fill="#666" text-anchor="middle">50万</text>
+<text x="263" y="305" font-size="11" fill="#666" text-anchor="middle">75万</text>
+<text x="330" y="305" font-size="11" fill="#666" text-anchor="middle">100万</text>
+<polyline points="62.0003,288 62.0003,286.514 62.0003,285.028 62.0004,283.542 62.0004,282.056 62.0004,280.569 62.0005,279.083 62.0005,277.597 62.0006,276.111 62.0006,274.625 62.0007,273.139 62.0008,271.653 62.0008,270.167 62.0009,268.681 62.001,267.194 62.0011,265.708 62.0012,264.222 62.0014,262.736 62.0015,261.25 62.0017,259.764 62.0018,258.278 62.002,256.792 62.0022,255.306 62.0024,253.819 62.0027,252.333 62.0029,250.847 62.0032,249.361 62.0036,247.875 62.0039,246.389 62.0043,244.903 62.0048,243.417 62.0052,241.931 62.0058,240.444 62.0064,238.958 62.007,237.472 62.0077,235.986 62.0085,234.5 62.0093,233.014 62.0103,231.528 62.0113,230.042 62.0124,228.556 62.0137,227.069 62.0151,225.583 62.0166,224.097 62.0183,222.611 62.0201,221.125 62.0221,219.639 62.0243,218.153 62.0268,216.667 62.0295,215.181 62.0325,213.694 62.0357,212.208 62.0393,210.722 62.0433,209.236 62.0477,207.75 62.0525,206.264 62.0577,204.778 62.0636,203.292 62.07,201.806 62.077,200.319 62.0847,198.833 62.0933,197.347 62.1027,195.861 62.113,194.375 62.1244,192.889 62.1369,191.403 62.1507,189.917 62.1659,188.431 62.1826,186.944 62.201,185.458 62.2212,183.972 62.2435,182.486 62.268,181 62.295,179.514 62.3247,178.028 62.3574,176.542 62.3934,175.056 62.433,173.569 62.4766,172.083 62.5246,170.597 62.5774,169.111 62.6355,167.625 62.6995,166.139 62.77,164.653 62.8475,163.167 62.9328,161.681 63.0268,160.194 63.1301,158.708 63.2439,157.222 63.3692,155.736 63.5071,154.25 63.6588,152.764 63.8259,151.278 64.0097,149.792 64.2121,148.306 64.4348,146.819 64.68,145.333 64.9499,143.847 65.2469,142.361 65.5738,140.875 65.9337,139.389 66.3298,137.903 66.7658,136.417 67.2457,134.931 67.7739,133.444 68.3553,131.958 68.9952,130.472 69.6996,128.986 70.4749,127.5 71.3283,126.014 72.2676,124.528 73.3015,123.042 74.4395,121.556 75.692,120.069 77.0707,118.583 78.5883,117.097 80.2586,115.611 82.0972,114.125 84.1208,112.639 86.3483,111.153 88.8,109.667 91.4986,108.181 94.4689,106.694 97.7384,105.208 101.337,103.722 105.298,102.236 109.658,100.75 114.457,99.2639 119.739,97.7778 125.553,96.2917 131.952,94.8056 138.996,93.3194 146.749,91.8333 155.283,90.3472 164.676,88.8611 175.015,87.375 186.395,85.8889 198.92,84.4028 212.707,82.9167 227.883,81.4306 244.586,79.9444 262.972,78.4583 283.208,76.9722 305.483,75.4861 330,74" fill="none" stroke="#e11d48" stroke-width="3"/>
+<text x="586" y="30" font-size="15" font-weight="bold" fill="#059669" text-anchor="middle">对数横轴：同样这些数据</text>
+<text x="586" y="50" font-size="12.5" fill="#777" text-anchor="middle">居然变成了一条笔直的线！</text>
+<line x1="452" y1="288" x2="720" y2="288" stroke="#333" stroke-width="2"/>
+<line x1="452" y1="288" x2="452" y2="60" stroke="#333" stroke-width="2"/>
+<line x1="452" y1="288" x2="720" y2="288" stroke="#e5e7eb"/>
+<text x="446" y="292" font-size="12" fill="#666" text-anchor="end">0</text>
+<line x1="452" y1="252.333" x2="720" y2="252.333" stroke="#e5e7eb"/>
+<text x="446" y="256.333" font-size="12" fill="#666" text-anchor="end">1</text>
+<line x1="452" y1="216.667" x2="720" y2="216.667" stroke="#e5e7eb"/>
+<text x="446" y="220.667" font-size="12" fill="#666" text-anchor="end">2</text>
+<line x1="452" y1="181" x2="720" y2="181" stroke="#e5e7eb"/>
+<text x="446" y="185" font-size="12" fill="#666" text-anchor="end">3</text>
+<line x1="452" y1="145.333" x2="720" y2="145.333" stroke="#e5e7eb"/>
+<text x="446" y="149.333" font-size="12" fill="#666" text-anchor="end">4</text>
+<line x1="452" y1="109.667" x2="720" y2="109.667" stroke="#e5e7eb"/>
+<text x="446" y="113.667" font-size="12" fill="#666" text-anchor="end">5</text>
+<line x1="452" y1="74" x2="720" y2="74" stroke="#e5e7eb"/>
+<text x="446" y="78" font-size="12" fill="#666" text-anchor="end">6</text>
+<line x1="452" y1="288" x2="452" y2="293" stroke="#bbb"/>
+<text x="452" y="307" font-size="11" fill="#666" text-anchor="middle">1</text>
+<circle cx="452" cy="288" r="4" fill="#059669"/>
+<line x1="496.667" y1="288" x2="496.667" y2="293" stroke="#bbb"/>
+<text x="496.667" y="307" font-size="11" fill="#666" text-anchor="middle">10</text>
+<circle cx="496.667" cy="252.333" r="4" fill="#059669"/>
+<line x1="541.333" y1="288" x2="541.333" y2="293" stroke="#bbb"/>
+<text x="541.333" y="307" font-size="11" fill="#666" text-anchor="middle">100</text>
+<circle cx="541.333" cy="216.667" r="4" fill="#059669"/>
+<line x1="586" y1="288" x2="586" y2="293" stroke="#bbb"/>
+<text x="586" y="307" font-size="11" fill="#666" text-anchor="middle">1千</text>
+<circle cx="586" cy="181" r="4" fill="#059669"/>
+<line x1="630.667" y1="288" x2="630.667" y2="293" stroke="#bbb"/>
+<text x="630.667" y="307" font-size="11" fill="#666" text-anchor="middle">1万</text>
+<circle cx="630.667" cy="145.333" r="4" fill="#059669"/>
+<line x1="675.333" y1="288" x2="675.333" y2="293" stroke="#bbb"/>
+<text x="675.333" y="307" font-size="11" fill="#666" text-anchor="middle">10万</text>
+<circle cx="675.333" cy="109.667" r="4" fill="#059669"/>
+<line x1="720" y1="288" x2="720" y2="293" stroke="#bbb"/>
+<text x="720" y="307" font-size="11" fill="#666" text-anchor="middle">100万</text>
+<circle cx="720" cy="74" r="4" fill="#059669"/>
+<line x1="452" y1="288" x2="720" y2="74" stroke="#059669" stroke-width="3.5"/>
+<text x="196" y="324" font-size="13" fill="#333" text-anchor="middle">x（数值）</text>
+<text x="586" y="326" font-size="13" fill="#333" text-anchor="middle">x（数值，对数间距）</text>
+</svg>
+<p>左右两边画的是<b>完全相同的数据</b>（x 从 1 到 100 万，y = lg x）。
+左边用普通刻度，曲线一头冲上天、右边全糊在一起，根本没法看；
+右边把横轴改成<b>对数间距</b>，同样的数据竟然变成<b>一条笔直的线</b>。</p>
+<div class="box key"><p style="margin:0" class="center">👉 这就是为什么科学家用“对数坐标”：
+<b>0.001 和 1000000 可以画在同一张纸上</b>。<br>也是为什么地震只说“5 级、7 级”，声音只说“60 分贝”——
+真实数字大得没法想象，取个对数就变成好用的小数。</p></div>
+
+<h2 id="c3" class="pagebreak">三、核心魔法：加法 ⇄ 乘法</h2>
+<div class="box magic">
+<h3 style="margin-top:0">3.1 先看一个具体的例子</h3>
+<p>4 = 2<sup>2</sup>（走了 2 格），8 = 2<sup>3</sup>（走了 3 格）。</p>
+<p>那么 4 × 8 呢？在尺子上想：先走 2 格到 4，<b>再继续往前走 3 格</b>，一共走了 <b>2 + 3 = 5</b> 格。</p>
+<p>5 格是几？2<sup>5</sup> = <b>32</b>。验算：4 × 8 = 32 ✅</p>
+<div class="calc">   4   ×   8   =   32
+   │       │       │
+ 2格  +  3格  =  5格      ← 数字相乘，格数相加！
+   │       │       │
+log₂4=2  log₂8=3  log₂32=5
+</div>
+</div>
+
+<h3>3.2 为什么一定成立？（给初中生的证明，只要一行）</h3>
+<div class="box key">
+<p class="center">2<sup>a</sup> × 2<sup>b</sup> = 2<sup>a+b</sup> &#160;&#160;<span style="color:#666">（同底数幂相乘，指数相加——这是初一学过的法则）</span></p>
+<p class="center">把这句话“反过来读”，就是：<b>log<sub>2</sub>(M × N) = log<sub>2</sub>M + log<sub>2</sub>N</b></p>
+<p class="center" style="font-size:20px;color:#e11d48"><b>乘法 → 加法</b></p>
+</div>
+
+<h3>3.3 一张“看得见的”对照表（底数为 2）</h3>
+<table>
+<tr><th>想算的乘法</th><th>拆成“格数”</th><th>格数相加</th><th>查回数字</th><th>答案</th></tr>
+<tr><td>2 × 4</td><td>1 + 2</td><td>3</td><td>2³</td><td><b>8</b></td></tr>
+<tr><td>4 × 8</td><td>2 + 3</td><td>5</td><td>2⁵</td><td><b>32</b></td></tr>
+<tr><td>8 × 16</td><td>3 + 4</td><td>7</td><td>2⁷</td><td><b>128</b></td></tr>
+<tr><td>2 × 2 × 2 × 2 × 2</td><td>1+1+1+1+1</td><td>5</td><td>2⁵</td><td><b>32</b></td></tr>
+<tr><td>16 × 64</td><td>4 + 6</td><td>10</td><td>2¹⁰</td><td><b>1024</b></td></tr>
+</table>
+<p class="center">👆 全程<b>没有做一次乘法</b>，只是在数格子、做加法。</p>
+
+<div class="widget rv" id="hopWidget">
+<h4>🎬 动画：看一个点“跳格子”算出 4 × 8</h4>
+<p class="hint">点播放：红点先跳 2 格到 4（这是第一个数），<b>接着再跳 3 格</b>（第二个数），一共 5 格 = 32。<br>
+你也可以换两个数试试（都选 2 的幂）。</p>
+<svg id="hopSvg" viewBox="0 0 900 150" class="fig" style="margin:6px 0"></svg>
+<div>
+  <label>第一个数：<select id="hopA"></select></label>
+  <label style="margin-left:14px">第二个数：<select id="hopB"></select></label>
+  <button class="btn" id="hopPlay">▶ 播放跳格子</button>
+  <button class="btn ghost" id="hopReset">重置</button>
+</div>
+<div class="readout" id="hopOut">格数：0 + 0 = 0　⇒　还没开始跳</div>
+</div>
+
+<h3>3.4 用“以 10 为底”再看一遍（这就是对数表的原理）</h3>
+<table>
+<tr><th>乘法</th><th>lg 相加</th><th>和</th><th>10 的几次方</th><th>结果</th></tr>
+<tr><td>100 × 1000</td><td>2 + 3</td><td>5</td><td>10⁵</td><td>100000</td></tr>
+<tr><td>2 × 5</td><td>0.3010 + 0.6990</td><td>1.0000</td><td>10¹</td><td><b>10</b> ✅</td></tr>
+<tr><td>3 × 4</td><td>0.4771 + 0.6021</td><td>1.0792</td><td>10^1.0792</td><td><b>12</b> ✅</td></tr>
+<tr><td>2 × 3</td><td>0.3010 + 0.4771</td><td>0.7781</td><td>10^0.7781</td><td><b>6</b> ✅</td></tr>
+<tr><td>7 × 8</td><td>0.8451 + 0.9031</td><td>1.7482</td><td>10^1.7482</td><td><b>56</b> ✅</td></tr>
+</table>
+
+<div class="box magic">
+<h3 style="margin-top:0">3.5 三条“魔法公式”（只需记这三条）</h3>
+<table style="width:100%">
+<tr><th style="width:34%">运算</th><th>公式</th><th style="width:26%">白话</th></tr>
+<tr><td><b>乘法 → 加法</b></td><td>log(M·N) = log M <b style="color:#e11d48">+</b> log N</td><td>相乘就把对数相加</td></tr>
+<tr><td><b>除法 → 减法</b></td><td>log(M÷N) = log M <b style="color:#059669">−</b> log N</td><td>相除就把对数相减</td></tr>
+<tr><td><b>乘方 → 乘法</b></td><td>log(Mⁿ) = <b style="color:#b45309">n</b> · log M</td><td>乘方就把对数乘 n</td></tr>
+</table>
+<p class="center" style="margin-bottom:0">规律：<b>每降一级运算，就从“难”变成“易”</b> —— 乘方→乘法、乘法→加法、除法→减法。</p>
+</div>
+
+<h2 id="c4">四、减法 ⇄ 除法</h2>
+<p>除法就是“乘法的倒着走”：32 ÷ 8 = 4，也就是从 32（5 格）<b>往回退</b> 3 格，落到 2 格 = 4。</p>
+<div class="calc">  32   ÷   8   =   4
+   │        │      │
+ 5格   −   3格 =  2格
+   │        │      │
+log₂32=5  log₂8=3  log₂4=2
+</div>
+<table>
+<tr><th>想算的除法</th><th>格数相减</th><th>差</th><th>答案</th></tr>
+<tr><td>64 ÷ 8</td><td>6 − 3</td><td>3</td><td>2³ = <b>8</b></td></tr>
+<tr><td>1024 ÷ 32</td><td>10 − 5</td><td>5</td><td>2⁵ = <b>32</b></td></tr>
+<tr><td>1000 ÷ 100</td><td>3 − 2</td><td>1</td><td>10¹ = <b>10</b></td></tr>
+<tr><td>10 ÷ 4（lg）</td><td>1.0000 − 0.6021</td><td>0.3979</td><td>10^0.3979 ≈ <b>2.5</b></td></tr>
+<tr><td>1 ÷ 8</td><td>0 − 3</td><td>−3</td><td>2⁻³ = <b>0.125</b></td></tr>
+</table>
+<div class="box key"><p class="center" style="margin:0">
+最后一行说明了一件漂亮的事：<b>负数的对数不是“没有意义”，它就是“小于 1 的数”</b>。<br>
+lg 0.1 = −1，lg 0.01 = −2。所以“减法”自然就能算出小数/分数，一点都不别扭。</p></div>
+
+<h2 id="c5">五、乘方与开方：最省力的地方</h2>
+<div class="box magic">
+<p class="center"><b>log(Mⁿ) = n × log M</b></p>
+<p>要算 7<sup>5</sup>（7 乘 5 次），用对数只要<b>把 lg7 乘 5</b>：<br>
+lg7 = 0.8451 → ×5 = 4.2255 → 10<sup>4.2255</sup> ≈ 1.681 × 10⁴ ≈ <b>16810</b>（准确值 16807）</p>
+<p>要算 √150（开平方就是 n = 1/2）：<b>把 lg150 除以 2</b><br>
+lg150 = 2.1761 → ÷2 = 1.08805 → 10<sup>1.08805</sup> ≈ <b>12.25</b>（准确值 12.247）</p>
+<p style="margin-bottom:0;color:#b45309"><b>开方在手算时代几乎是不可能的任务，用对数表 30 秒就出来了。</b>
+这就是天文学家最爱的地方——行星轨道计算里全是开方和乘方。</p>
+</div>
+<table>
+<tr><th>运算</th><th>手算难度</th><th>用对数变成</th><th>难度</th></tr>
+<tr><td>A × B</td><td>⭐⭐⭐ 列竖式</td><td>logA + logB</td><td>⭐ 加法</td></tr>
+<tr><td>A ÷ B</td><td>⭐⭐⭐⭐ 试商</td><td>logA − logB</td><td>⭐ 减法</td></tr>
+<tr><td>Aⁿ</td><td>⭐⭐⭐⭐⭐ 乘 n 次</td><td>n × logA</td><td>⭐⭐ 一次乘法</td></tr>
+<tr><td>ⁿ√A</td><td>⭐⭐⭐⭐⭐ 几乎不可能</td><td>logA ÷ n</td><td>⭐⭐ 一次除法</td></tr>
+</table>
+
+<h2 id="c6" class="pagebreak">六、对数表长什么样、怎么查</h2>
+<h3>6.1 一个数分成两部分：首数 + 尾数</h3>
+<div class="box key">
+<p class="center" style="font-size:18px">lg 347 = <b style="color:#1c5f96">2</b> . <b style="color:#e11d48">5403</b></p>
+<p class="center">
+<span class="tag">首数 2</span>只看“有几个整数位”：347 是 <b>3 位数</b> → 3 − 1 = <b>2</b>（代表 ×100 的规模）<br>
+<span class="tag">尾数 .5403</span>只看“数字的样子”：查表查 <b>3.47</b> 就行（小数点位置不影响尾数！）
+</p>
+<p class="center" style="margin-bottom:0;color:#b45309">
+所以：<b>lg 3.47 = 0.5403，lg 34.7 = 1.5403，lg 347 = 2.5403，lg 3470 = 3.5403</b><br>
+一张表就能应付所有大小 —— 这就是对数表能用几百年的原因。</p>
+</div>
+
+<div class="widget rv" id="lookupWidget">
+<h4>🔍 交互：随便输一个数，看它在对数表里“亮”起来</h4>
+<p class="hint">输入任意正数（如 347、0.056、12345），会自动算出首数/尾数，
+并在下方附录的完整对数表里<b>高亮</b>对应的那一格。</p>
+<input type="number" id="lkNum" value="347" step="any" min="0">
+<button class="btn" id="lkGo">查表！</button>
+<button class="btn ghost" id="lkRand">🎲 随机一个</button>
+<div class="readout" id="lkOut"></div>
+</div>
+
+<table>
+<tr><th>数字</th><td>3.47</td><td>34.7</td><td>347</td><td>3470</td><td>34700</td><td>0.347</td><td>0.0347</td></tr>
+<tr><th>首数</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>−1</td><td>−2</td></tr>
+<tr><th>尾数</th><td colspan="7" style="background:#ecfdf5">全都是 <b>.5403</b>（查表只查一次！）</td></tr>
+<tr><th>lg 值</th><td>0.5403</td><td>1.5403</td><td>2.5403</td><td>3.5403</td><td>4.5403</td><td>−0.4597</td><td>−1.4597</td></tr>
+</table>
+
+<h3>6.2 简易对数表：lg(1.0 ~ 9.9)</h3>
+<p>横着看第一列是“个位数字”，往右是“小数点后第一位”。</p>
+<table class="logtable"><tr><th>N</th><th>+0</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>+6</th><th>+7</th><th>+8</th><th>+9</th></tr><tr><th>1.</th><td>0.0000</td><td>0.0414</td><td>0.0792</td><td>0.1139</td><td>0.1461</td><td>0.1761</td><td>0.2041</td><td>0.2304</td><td>0.2553</td><td>0.2788</td></tr><tr><th>2.</th><td>0.3010</td><td>0.3222</td><td>0.3424</td><td>0.3617</td><td>0.3802</td><td>0.3979</td><td>0.4150</td><td>0.4314</td><td>0.4472</td><td>0.4624</td></tr><tr><th>3.</th><td>0.4771</td><td>0.4914</td><td>0.5051</td><td>0.5185</td><td>0.5315</td><td>0.5441</td><td>0.5563</td><td>0.5682</td><td>0.5798</td><td>0.5911</td></tr><tr><th>4.</th><td>0.6021</td><td>0.6128</td><td>0.6232</td><td>0.6335</td><td>0.6435</td><td>0.6532</td><td>0.6628</td><td>0.6721</td><td>0.6812</td><td>0.6902</td></tr><tr><th>5.</th><td>0.6990</td><td>0.7076</td><td>0.7160</td><td>0.7243</td><td>0.7324</td><td>0.7404</td><td>0.7482</td><td>0.7559</td><td>0.7634</td><td>0.7709</td></tr><tr><th>6.</th><td>0.7782</td><td>0.7853</td><td>0.7924</td><td>0.7993</td><td>0.8062</td><td>0.8129</td><td>0.8195</td><td>0.8261</td><td>0.8325</td><td>0.8388</td></tr><tr><th>7.</th><td>0.8451</td><td>0.8513</td><td>0.8573</td><td>0.8633</td><td>0.8692</td><td>0.8751</td><td>0.8808</td><td>0.8865</td><td>0.8921</td><td>0.8976</td></tr><tr><th>8.</th><td>0.9031</td><td>0.9085</td><td>0.9138</td><td>0.9191</td><td>0.9243</td><td>0.9294</td><td>0.9345</td><td>0.9395</td><td>0.9445</td><td>0.9494</td></tr><tr><th>9.</th><td>0.9542</td><td>0.9590</td><td>0.9638</td><td>0.9685</td><td>0.9731</td><td>0.9777</td><td>0.9823</td><td>0.9868</td><td>0.9912</td><td>0.9956</td></tr></table>
+<p class="center">例：找 3.4 → 第 3 行第 4 列 = <b>0.5315</b>；找 8.6 → <b>0.9345</b></p>
+
+<h3>6.3 查表四步法（口诀）</h3>
+<div class="box magic">
+<table style="width:100%">
+<tr><th>步骤</th><th>做什么</th><th>以 lg 347 为例</th></tr>
+<tr><td><b>① 定首数</b></td><td>数整数位数 − 1</td><td>347 是 3 位 → 首数 = <b>2</b></td></tr>
+<tr><td><b>② 归一化</b></td><td>把小数点移到最前面，变成 1~10 之间</td><td>347 → <b>3.47</b></td></tr>
+<tr><td><b>③ 查尾数</b></td><td>在表里查这个数</td><td>lg 3.47 = <b>.5403</b></td></tr>
+<tr><td><b>④ 拼起来</b></td><td>首数 + 尾数</td><td><b>2.5403</b></td></tr>
+</table>
+</div>
+
+<h2 id="c7">七、实战三题</h2>
+
+<h3>例题 1：计算 347 × 86（不许列竖式）</h3>
+<div class="widget rv">
+<h4>🎬 分步动画：把乘法变成“把两根柱子叠起来”</h4>
+<p class="hint">点“下一步”或“自动播放”，看两根代表对数的柱子如何<b>叠成一根</b>——那就是答案的对数。</p>
+<button class="btn" id="cpNext">下一步 ▶</button>
+<button class="btn" id="cpAuto">⏩ 自动播放</button>
+<button class="btn ghost" id="cpReset">↺ 重置</button>
+<svg id="barSvg" viewBox="0 0 560 250" class="fig" style="margin:8px 0;max-width:560px"></svg>
+</div>
+<div class="calc" id="calc1">
+<div class="st">第1步  查表： lg 347 = 2.5403      （3位-1=2，尾数查 3.47）
+        lg  86 = 1.9345      （2位-1=1，尾数查 8.6）</div>
+<div class="st">第2步  相加： 2.5403
+        + 1.9345
+        ─────────
+          4.4748      ← 这就是答案的对数（= 两根柱子叠起来的高度）</div>
+<div class="st">第3步  拆回： 4.4748 = 4 + 0.4748
+        首数 4  ⇒ 答案是 5 位数（4+1）
+        尾数 .4748 ⇒ 反查表，最接近 2.984</div>
+<div class="st">第4步  拼出： 2.984 × 10⁴ = <b style="color:#e11d48;font-size:20px">29840</b></div>
+<div class="st">验算：347 × 86 = 29842   误差只有 2 / 29842 ≈ 0.007% 🎉</div>
+</div>
+<p>👉 用计算器按 8 次键 vs 用对数表查 3 次 + 加 1 次。数字越大，优势越夸张——
+如果是 <b>3478921 × 864372</b>，竖式要写满一页纸，对数表还是<b>同样的 3 步</b>。</p>
+
+<h3>例题 2：计算 1024 ÷ 32</h3>
+<div class="calc">lg 1024 = 3.0103
+lg   32 = 1.5051
+相减：  3.0103 − 1.5051 = 1.5052
+反查：  尾数 .5052 ⇒ 3.200，首数 1 ⇒ 2 位数
+答案：  3.200 × 10¹ = <b style="color:#059669">32</b>   （准确值 32，完全正确 ✅）</div>
+
+<h3>例题 3：计算 7⁵ 和 √150</h3>
+<div class="calc">【7⁵】  lg 7 = 0.8451
+       ×5  ⇒ 4.2255
+       反查 .2255 ⇒ 1.681，首数 4 ⇒ 5 位数
+       答案 ≈ 16810   （准确 16807，误差 0.02%）
+
+【√150】 lg 150 = 2.1761
+        ÷2  ⇒ 1.08805
+        反查 .0880 ⇒ 1.2246，首数 1 ⇒ 2 位数
+        答案 ≈ <b style="color:#b45309">12.25</b>   （准确 12.2474）</div>
+
+<div class="box warn">
+<b>“反查表”（反对数）怎么做？</b> 就是拿着尾数在表里<b>倒着找</b>：
+看 0.4748 最接近表中哪个数 → 找到 2.98 那一格是 .4742，2.99 那一格是 .4757，
+0.4748 更靠近 2.98，稍微大一点点，所以取 <b>2.984</b>。<br>
+<b>初中阶段只要求“会用”，会估到 3 位有效数字就够了。</b>
+</div>
+
+<h2 id="c8">八、计算尺：把对数刻在木头上</h2>
+<p>既然“数字的距离 = 对数”，那我们干脆<b>把尺子的刻度按对数间距来刻</b>。
+两把这样的尺子一滑，加法就自动完成了——这就是<b>计算尺（Slide Rule）</b>，
+从 17 世纪一直用到 1970 年代，工程师用它造出了<b>飞机、大坝，甚至把人送上了月球</b>。</p>
+<svg viewBox="0 0 780 356" xmlns="http://www.w3.org/2000/svg" class="fig">
+<rect x="0" y="0" width="780" height="356" fill="#fffdf7"/>
+<text x="390" y="28" font-size="19" text-anchor="middle" fill="#123" font-weight="bold">把 B 尺的 “1” 对准 A 尺的 “2”，B 尺的 “3” 正下方就是 6  ⇒  2 × 3 = 6</text>
+<text x="390" y="50" font-size="14" text-anchor="middle" fill="#555">原理：尺子上的“距离”是对数，距离相加 = 数字相乘</text>
+<rect x="46" y="122" width="420" height="44" rx="6" fill="#d7ecff" stroke="#3b82c4" stroke-width="2"/>
+<text x="46" y="100" font-size="15" fill="#1c5f96" font-weight="bold">尺子 A（固定不动）</text>
+<rect x="166.412" y="240" width="420" height="44" rx="6" fill="#ffe6d1" stroke="#d1762b" stroke-width="2"/>
+<text x="166.412" y="308" font-size="15" fill="#a4541a" font-weight="bold">尺子 B（向右滑动，让它的 1 对准 A 的 2）</text>
+<line x1="56" y1="132" x2="56" y2="156" stroke="#1c5f96" stroke-width="3"/>
+<text x="56" y="118" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">1</text>
+<line x1="176.412" y1="250" x2="176.412" y2="274" stroke="#a4541a" stroke-width="3"/>
+<text x="176.412" y="236" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">1</text>
+<line x1="176.412" y1="132" x2="176.412" y2="156" stroke="#1c5f96" stroke-width="3"/>
+<text x="176.412" y="118" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">2</text>
+<line x1="296.824" y1="250" x2="296.824" y2="274" stroke="#a4541a" stroke-width="3"/>
+<text x="296.824" y="236" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">2</text>
+<line x1="246.849" y1="132" x2="246.849" y2="156" stroke="#1c5f96" stroke-width="3"/>
+<text x="246.849" y="118" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">3</text>
+<line x1="367.261" y1="250" x2="367.261" y2="274" stroke="#a4541a" stroke-width="3"/>
+<text x="367.261" y="236" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">3</text>
+<line x1="296.824" y1="132" x2="296.824" y2="146" stroke="#1c5f96" stroke-width="1"/>
+<text x="296.824" y="118" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">4</text>
+<line x1="417.236" y1="250" x2="417.236" y2="264" stroke="#a4541a" stroke-width="1"/>
+<text x="417.236" y="236" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">4</text>
+<line x1="335.588" y1="132" x2="335.588" y2="146" stroke="#1c5f96" stroke-width="1"/>
+<text x="335.588" y="118" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">5</text>
+<line x1="456" y1="250" x2="456" y2="264" stroke="#a4541a" stroke-width="1"/>
+<text x="456" y="236" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">5</text>
+<line x1="367.261" y1="132" x2="367.261" y2="156" stroke="#1c5f96" stroke-width="3"/>
+<text x="367.261" y="118" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">6</text>
+<line x1="487.672" y1="250" x2="487.672" y2="274" stroke="#a4541a" stroke-width="3"/>
+<text x="487.672" y="236" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">6</text>
+<line x1="394.039" y1="132" x2="394.039" y2="146" stroke="#1c5f96" stroke-width="1"/>
+<text x="394.039" y="118" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">7</text>
+<line x1="514.451" y1="250" x2="514.451" y2="264" stroke="#a4541a" stroke-width="1"/>
+<text x="514.451" y="236" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">7</text>
+<line x1="417.236" y1="132" x2="417.236" y2="146" stroke="#1c5f96" stroke-width="1"/>
+<text x="417.236" y="118" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">8</text>
+<line x1="537.648" y1="250" x2="537.648" y2="264" stroke="#a4541a" stroke-width="1"/>
+<text x="537.648" y="236" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">8</text>
+<line x1="437.697" y1="132" x2="437.697" y2="146" stroke="#1c5f96" stroke-width="1"/>
+<text x="437.697" y="118" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">9</text>
+<line x1="558.109" y1="250" x2="558.109" y2="264" stroke="#a4541a" stroke-width="1"/>
+<text x="558.109" y="236" font-size="12" text-anchor="middle" fill="#123" font-weight="normal">9</text>
+<line x1="456" y1="132" x2="456" y2="156" stroke="#1c5f96" stroke-width="3"/>
+<text x="456" y="118" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">10</text>
+<line x1="576.412" y1="250" x2="576.412" y2="274" stroke="#a4541a" stroke-width="3"/>
+<text x="576.412" y="236" font-size="17" text-anchor="middle" fill="#123" font-weight="bold">10</text>
+<line x1="176.412" y1="158" x2="176.412" y2="236" stroke="#e11d48" stroke-width="2" stroke-dasharray="5 4"/>
+<circle cx="176.412" cy="248" r="6" fill="#e11d48"/>
+<text x="164.412" y="206" font-size="14" fill="#e11d48" text-anchor="end" font-weight="bold" stroke="#fffdf7" stroke-width="4" paint-order="stroke">① 1 对准 2</text>
+<line x1="367.261" y1="158" x2="367.261" y2="236" stroke="#059669" stroke-width="2.5" stroke-dasharray="5 4"/>
+<circle cx="367.261" cy="158" r="6" fill="#059669"/>
+<circle cx="367.261" cy="248" r="6" fill="#059669"/>
+<text x="383.261" y="192" font-size="15" fill="#059669" text-anchor="start" font-weight="bold" stroke="#fffdf7" stroke-width="4" paint-order="stroke">② 在 3 的正下方读出 6</text>
+<text x="390" y="344" font-size="14" text-anchor="middle" fill="#444">lg2 + lg3 = 0.3010 + 0.4771 = 0.7781 = lg6　　⇒　　2 × 3 = 6</text>
+</svg>
+<div class="box key">
+<p><b>课堂小实验（5 分钟，超有说服力）：</b></p>
+<ol style="margin-bottom:0">
+<li>拿两张纸条，各自按“对数间距”标上 1、2、3、…、10（间距 = lg 值，
+1→2 长，2→3 短，越往后越挤）。</li>
+<li>把纸条 B 的“1”对准纸条 A 的“2”，看 B 的“3”落在 A 的哪个数上 → <b>6</b>。</li>
+<li>再试：B 的 1 对准 A 的 4，B 的 5 落在哪？→ <b>20</b>。</li>
+<li>把 B 反过来放（1 对准 A 的 10），就是<b>除法</b>。</li>
+</ol>
+</div>
+
+<div class="widget rv" id="ruleWidget">
+<h4>🎬 交互计算尺：拖滑块，看尺子自己“算”出乘法</h4>
+<p class="hint">拖动 a、b 两个滑块，橙色尺子会<b>平滑滑动</b>（这就是动画！），
+绿色虚线落下的位置就是 a × b。注意看：尺子移动的距离 = lg a，而读数 = lg a + lg b。</p>
+<svg id="ruleSvg" viewBox="0 0 900 240" class="fig" style="margin:6px 0"></svg>
+<div>
+  <label>a = <input type="range" id="rA" min="1" max="10" step="1" value="2"></label>
+  <label style="margin-left:16px">b = <input type="range" id="rB" min="1" max="10" step="1" value="3"></label>
+  <button class="btn" id="rDemo">⏩ 自动演示几组</button>
+</div>
+<div class="readout" id="rOut"></div>
+</div>
+
+<h2 id="c9" class="pagebreak">九、生活中的对数</h2>
+<svg viewBox="0 0 760 348" xmlns="http://www.w3.org/2000/svg" class="fig">
+<rect width="760" height="348" fill="#fffdf7"/>
+<text x="137.5" y="34" font-size="17" font-weight="bold" fill="#3b82c4" text-anchor="middle">pH 值</text>
+<rect x="20" y="60" width="235" height="44" rx="8" fill="#3b82c4" opacity="0.15" stroke="#3b82c4"/>
+<text x="137.5" y="87" font-size="13.5" fill="#123" text-anchor="middle">pH 7 纯水</text>
+<text x="137.5" y="112" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="20" y="112" width="235" height="44" rx="8" fill="#3b82c4" opacity="0.32" stroke="#3b82c4"/>
+<text x="137.5" y="139" font-size="13.5" fill="#123" text-anchor="middle">pH 6 牛奶(×10酸)</text>
+<text x="137.5" y="164" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="20" y="164" width="235" height="44" rx="8" fill="#3b82c4" opacity="0.49" stroke="#3b82c4"/>
+<text x="137.5" y="191" font-size="13.5" fill="#123" text-anchor="middle">pH 5 咖啡(×100)</text>
+<text x="137.5" y="216" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="20" y="216" width="235" height="44" rx="8" fill="#3b82c4" opacity="0.66" stroke="#3b82c4"/>
+<text x="137.5" y="243" font-size="13.5" fill="#123" text-anchor="middle">pH 4 番茄汁(×1000)</text>
+<text x="137.5" y="268" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="20" y="268" width="235" height="44" rx="8" fill="#3b82c4" opacity="0.83" stroke="#3b82c4"/>
+<text x="137.5" y="295" font-size="13.5" fill="#123" text-anchor="middle">pH 2 柠檬汁(×10⁵)</text>
+<text x="387.5" y="34" font-size="17" font-weight="bold" fill="#d1762b" text-anchor="middle">地震震级</text>
+<rect x="270" y="60" width="235" height="44" rx="8" fill="#d1762b" opacity="0.15" stroke="#d1762b"/>
+<text x="387.5" y="87" font-size="13.5" fill="#123" text-anchor="middle">3 级</text>
+<text x="387.5" y="112" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="270" y="112" width="235" height="44" rx="8" fill="#d1762b" opacity="0.32" stroke="#d1762b"/>
+<text x="387.5" y="139" font-size="13.5" fill="#123" text-anchor="middle">4 级 摇晃×10</text>
+<text x="387.5" y="164" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="270" y="164" width="235" height="44" rx="8" fill="#d1762b" opacity="0.49" stroke="#d1762b"/>
+<text x="387.5" y="191" font-size="13.5" fill="#123" text-anchor="middle">5 级 ×100</text>
+<text x="387.5" y="216" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="270" y="216" width="235" height="44" rx="8" fill="#d1762b" opacity="0.66" stroke="#d1762b"/>
+<text x="387.5" y="243" font-size="13.5" fill="#123" text-anchor="middle">6 级 ×1000</text>
+<text x="387.5" y="268" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="270" y="268" width="235" height="44" rx="8" fill="#d1762b" opacity="0.83" stroke="#d1762b"/>
+<text x="387.5" y="295" font-size="13.5" fill="#123" text-anchor="middle">7 级 ×10000</text>
+<text x="637.5" y="34" font-size="17" font-weight="bold" fill="#059669" text-anchor="middle">声音分贝</text>
+<rect x="520" y="60" width="235" height="44" rx="8" fill="#059669" opacity="0.15" stroke="#059669"/>
+<text x="637.5" y="87" font-size="13.5" fill="#123" text-anchor="middle">30 dB 耳语</text>
+<text x="637.5" y="112" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="520" y="112" width="235" height="44" rx="8" fill="#059669" opacity="0.32" stroke="#059669"/>
+<text x="637.5" y="139" font-size="13.5" fill="#123" text-anchor="middle">40 dB (+10)</text>
+<text x="637.5" y="164" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="520" y="164" width="235" height="44" rx="8" fill="#059669" opacity="0.49" stroke="#059669"/>
+<text x="637.5" y="191" font-size="13.5" fill="#123" text-anchor="middle">50 dB (+20)</text>
+<text x="637.5" y="216" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="520" y="216" width="235" height="44" rx="8" fill="#059669" opacity="0.66" stroke="#059669"/>
+<text x="637.5" y="243" font-size="13.5" fill="#123" text-anchor="middle">60 dB 说话</text>
+<text x="637.5" y="268" font-size="13" fill="#e11d48" text-anchor="middle" font-weight="bold">▲ ×10</text>
+<rect x="520" y="268" width="235" height="44" rx="8" fill="#059669" opacity="0.83" stroke="#059669"/>
+<text x="637.5" y="295" font-size="13.5" fill="#123" text-anchor="middle">70 dB (+40)</text>
+<text x="380" y="338" font-size="15" fill="#555" text-anchor="middle">共同点：刻度上“加 1”，真实世界里是“乘 10” —— 这就是对数把“乘法”变成“加法”</text>
+</svg>
+<p>为什么要用对数刻度？因为真实世界很多量的<b>范围大得离谱</b>：</p>
+<table>
+<tr><th>现象</th><th>真实范围</th><th>如果按真实值画</th><th>用对数画</th></tr>
+<tr><td>声音强度</td><td>耳语 到 喷气机 = <b>10¹² 倍</b></td><td>耳语那条线根本看不见</td><td>0 ~ 120 分贝，很舒服</td></tr>
+<tr><td>地震能量</td><td>3 级到 9 级 ≈ <b>10⁹ 倍</b></td><td>画不下</td><td>3 ~ 9，一眼看懂</td></tr>
+<tr><td>溶液酸度</td><td>pH 1 到 pH 14 = <b>10¹³ 倍</b></td><td>画不下</td><td>1 ~ 14</td></tr>
+</table>
+
+<h3>9.1 分贝（dB）—— 最典型的对数应用</h3>
+<div class="box story">
+<p class="center"><b>响度等级 = 10 × lg(声音强度 ÷ 基准强度)</b></p>
+<table>
+<tr><th>声音</th><td>耳语</td><td>图书馆</td><td>正常说话</td><td>汽车鸣笛</td><td>摇滚演唱会</td><td>喷气机</td><td>疼痛极限</td></tr>
+<tr><th>分贝</th><td>20</td><td>30</td><td>60</td><td>90</td><td>110</td><td>120</td><td>130</td></tr>
+<tr><th>强度倍数</th><td>10²</td><td>10³</td><td>10⁶</td><td>10⁹</td><td>10¹¹</td><td>10¹²</td><td>10¹³</td></tr>
+</table>
+<p style="margin-bottom:0">
+🔑 <b>加 10 分贝 = 强度 ×10</b>；<b>加 3 分贝 = 强度 ×2</b>（因为 lg2 ≈ 0.3，×10 = 3）。<br>
+所以两个一样的喇叭一起响，<b>不是 60+60=120 分贝，而是 63 分贝</b>！—— 因为能量只翻倍，不是翻一亿倍。
+这也是为什么“分贝不能直接相加”。</p>
+</div>
+
+<div class="widget rv" id="dbWidget">
+<h4>🔊 交互：拖一拖分贝滑块，感受“加 10 = 乘 10”</h4>
+<p class="hint">拖动滑块，看真实强度倍数如何爆炸式增长；再点按钮看“两个相同声音叠加”会发生什么。</p>
+<label>声音 = <input type="range" id="dbR" min="0" max="130" step="1" value="60"> <span id="dbV" style="font-weight:bold">60</span> dB</label>
+<div class="readout" id="dbOut"></div>
+<div><button class="btn" id="dbTwo">🔊🔊 两个这样的声音一起响</button></div>
+</div>
+
+<h3>9.2 里氏震级</h3>
+<p>震级每 <b>+1</b>，地震波幅度 <b>×10</b>，释放能量约 <b>×32</b>；
+每 <b>+2</b>，能量约 <b>×1000</b>。所以 <b>8 级地震的能量 ≈ 6 级的 1000 倍</b>，
+不是“大一点点”，而是差了好几个数量级。</p>
+
+<h3>9.3 pH 值</h3>
+<p>pH = −lg(氢离子浓度)。pH 每减 1，酸性 <b>×10</b>。<br>
+柠檬汁 pH 2 vs 牛奶 pH 6 → 酸性差 <b>10⁴ = 一万倍</b>。胃酸 pH 1~2，这就是它为什么能腐蚀金属。</p>
+
+<h3>9.4 音乐的十二平均律（超适合课堂演示）</h3>
+<div class="box magic">
+<p>高八度的音，频率正好 <b>×2</b>。要把它平均分成 12 个半音，每步都要乘同一个数 k，且 k¹² = 2。</p>
+<p class="center">k = 2<sup>1/12</sup> ≈ <b>1.0595</b>（每一步频率增加约 5.95%）</p>
+<p style="margin-bottom:0">用对数：lg k = lg2 ÷ 12 = 0.3010 ÷ 12 = <b>0.02508</b>。
+👉 <b>“开 12 次方”这么难的运算，用对数就是一次除法。</b>钢琴每一格的间距，其实是对数等分的。</p>
+</div>
+
+<h3>9.5 其它一眼就懂的例子</h3>
+<table>
+<tr><th>场景</th><th>对数在哪起作用</th></tr>
+<tr><td>星星的星等</td><td>星等每差 5 等，亮度差 <b>100 倍</b>（差 1 等 ≈ 2.512 倍 = 100^(1/5)）</td></tr>
+<tr><td>银行复利 / “72 法则”</td><td>钱翻倍年数 ≈ <b>72 ÷ 年利率%</b>（来自 lg2 ≈ 0.301）。年利 6% → 约 12 年翻倍</td></tr>
+<tr><td>人口/病毒增长</td><td>指数增长画出来是一条飞起来的曲线；取对数后<b>变成一条直线</b>，一眼看出增长速度</td></tr>
+<tr><td>A4 纸</td><td>对折一次面积减半，长宽比不变（√2）—— 同样是“乘法变加法”的思路</td></tr>
+<tr><td>地图/图纸的对数坐标纸</td><td>能把 0.001 和 1000000 画在同一张纸上</td></tr>
+</table>
+
+<h2 id="c10">十、课堂练习</h2>
+<details><summary>第 1 组：口算（把乘法变成加法）</summary>
+<ol>
+<li>log₂16 = ?</li>
+<li>lg 10000 = ?</li>
+<li>已知 lg2 = 0.3010，求 lg 4、lg 8、lg 16、lg 32（不许用计算器）</li>
+<li>已知 lg2 = 0.3010、lg3 = 0.4771，求 lg 6、lg 12、lg 9、lg 1.5</li>
+<li>用对数算：2⁵ × 2³ = ?（写出“格数相加”的过程）</li>
+<li>用对数算：1000 ÷ 20 = ?（lg1000 − lg20）</li>
+</ol>
+<p class="answer">答案：1) 4 &#160; 2) 4 &#160;
+3) 0.6020 / 0.9030 / 1.2041 / 1.5051 &#160;
+4) lg6 = 0.7781，lg12 = 1.0792，lg9 = 0.9542，lg1.5 = 0.1761 &#160;
+5) 5+3 = 8 格 → 2⁸ = 256 &#160; 6) 3 − 1.3010 = 1.6990 → 50</p>
+</details>
+
+<details><summary>第 2 组：用对数表算（保留 3 位有效数字）</summary>
+<ol start="7">
+<li>256 × 74</li>
+<li>3.14 × 2.71</li>
+<li>900 ÷ 45</li>
+<li>6⁴</li>
+<li>√250</li>
+<li>1.05¹⁰（提示：lg1.05 = 0.0212）</li>
+</ol>
+<p class="answer">答案：7) lg = 2.4082+1.8692 = 4.2774 → <b>1.89×10⁴ ≈ 18900</b>（准确 18944）<br>
+8) 0.4969+0.4330 = 0.9299 → <b>8.51</b>（准确 8.5094）<br>
+9) 2.9542 − 1.6532 = 1.3010 → <b>20</b> ✅<br>
+10) lg6 = 0.7782 ×4 = 3.1128 → <b>1.296×10³ ≈ 1300</b>（准确 1296）<br>
+11) lg250 = 2.3979 ÷2 = 1.1990 → <b>15.8</b>（准确 15.81）<br>
+12) 0.0212×10 = 0.212 → <b>1.63</b>（准确 1.6289）—— 这就是“年利 5%，10 年涨 63%”</p>
+</details>
+
+<details><summary>第 3 组：思考与生活</summary>
+<ol start="13">
+<li>两个 60 分贝的喇叭一起响，是 120 分贝吗？为什么？</li>
+<li>7 级地震的振幅是 5 级的几倍？</li>
+<li>pH = 3 的橙汁和 pH = 6 的雨水，酸性差多少倍？</li>
+<li>为什么 lg 0 = 没有意义？（提示：10 的多少次方等于 0？）</li>
+<li>为什么负数没有对数？</li>
+<li>lg 2 + lg 5 等于多少？为什么这么整齐？</li>
+<li>如果 log₂x = 7.5，x 大约是多少？（提示：2⁷ = 128，2⁸ = 256）</li>
+</ol>
+<p class="answer">答案：13) 不是，是 <b>63 分贝</b>（能量 ×2 → +3 dB）<br>
+14) 10² = <b>100 倍</b>（能量约 1000 倍）<br>
+15) 10³ = <b>1000 倍</b><br>
+16) 因为 10 的任何次方都 <b>&gt; 0</b>，永远得不到 0；越接近 0 需要越负的对数（lg0.001 = −3 …），趋于 −∞<br>
+17) 因为 10 的正数次方一定 &gt;1，负数次方一定 &gt;0，<b>永远得不出负数</b><br>
+18) lg2 + lg5 = lg(2×5) = lg10 = <b>1</b> ← 这正是“乘法变加法”的最美例证<br>
+19) 2⁷·⁵ = 2⁷ × √2 ≈ 128 × 1.414 ≈ <b>181</b></p>
+</details>
+
+<h2 id="c11" class="pagebreak">十一、给讲解者的“口径”与常见误区</h2>
+<h3>11.1 推荐的讲课顺序（40 分钟）</h3>
+<table>
+<tr><th>时间</th><th>环节</th><th>关键动作</th></tr>
+<tr><td>0–5 min</td><td>痛点引入</td><td>让学生手算 347×86，感受“烦”，再讲纳皮尔的故事</td></tr>
+<tr><td>5–12 min</td><td>“格子”直觉</td><td>画 2 的幂尺子图，反复强调 <b>对数 = 第几格</b>，不要出现公式</td></tr>
+<tr><td>12–22 min</td><td>魔法时刻</td><td>4×8：只数格子就得出 32。再让学生自己算 8×16、16×64</td></tr>
+<tr><td>22–28 min</td><td>动手实验</td><td>纸条计算尺（或直接用本文的图）</td></tr>
+<tr><td>28–35 min</td><td>查表实战</td><td>带学生查表算 347×86，见证误差只有 0.007%</td></tr>
+<tr><td>35–40 min</td><td>回到生活</td><td>分贝 / 地震 / pH / 钢琴，让学生说“原来这就是对数”</td></tr>
+</table>
+
+<h3>11.2 三个最有力的比喻</h3>
+<table>
+<tr><th>比喻</th><th>怎么说</th></tr>
+<tr><td><b>数格子</b></td><td>“对数就是问：从 1 出发，要乘几次才能到这个数？”——把抽象符号变成可数的东西</td></tr>
+<tr><td><b>爬楼梯</b></td><td>“每上一层楼 = ×10。3 楼到 5 楼差 2 层，就是差 100 倍。”楼层号就是对数</td></tr>
+<tr><td><b>两个尺子</b></td><td>“距离相加 = 数字相乘。”用手比划，最能建立几何直觉</td></tr>
+</table>
+
+<h3>11.3 学生常犯的错</h3>
+<div class="box warn">
+<table style="width:100%">
+<tr><th>错误写法</th><th>为什么错</th><th>正确</th></tr>
+<tr><td>lg(a + b) = lg a + lg b</td><td>对数只把<b>乘法</b>变加法，对加法<b>没有任何办法</b></td><td>lg(a+b) 无法拆开</td></tr>
+<tr><td>(lg a)² = 2 lg a</td><td>左边是 lg a 自己乘自己；右边是 lg(a²)</td><td>lg(a²) = 2 lg a</td></tr>
+<tr><td>lg a × lg b = lg(ab)</td><td>对数值<b>相乘</b>没有意义</td><td>lg a + lg b = lg(ab)</td></tr>
+<tr><td>60dB + 60dB = 120dB</td><td>对数标度不能直接相加</td><td>= 63 dB</td></tr>
+<tr><td>“对数就是很难的函数”</td><td>它其实就是<b>指数换个问法</b></td><td>10²=100 ⇔ lg100=2</td></tr>
+</table>
+</div>
+
+<h3>11.4 一句话总结（写在黑板上）</h3>
+<div class="box magic"><p class="center" style="font-size:21px;margin:6px 0">
+<b>对数把“大数的乘除”变成“小数的加减”，<br>
+把“乘方开方”变成“乘除”，<br>
+所以人类在没有电脑的时代，也算得动星星。</b></p></div>
+
+<h2 id="c12">十二、附录：完整常用对数表（尾数 ×10000）</h2>
+<p>用法：查 <b>lg 3.47</b> → 找行 <b>34</b>、列 <b>7</b> → 得 <b>5403</b>，即尾数 <b>0.5403</b>。<br>
+再按“位数 − 1”加上首数：lg347 = 2.5403，lg3470 = 3.5403，lg0.0347 = −1.4597。</p>
+<table class="logtable small"><tr><th>N</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr><tr><th>10</th><td id="c10_0">0000</td><td id="c10_1">0043</td><td id="c10_2">0086</td><td id="c10_3">0128</td><td id="c10_4">0170</td><td id="c10_5">0212</td><td id="c10_6">0253</td><td id="c10_7">0294</td><td id="c10_8">0334</td><td id="c10_9">0374</td></tr><tr><th>11</th><td id="c11_0">0414</td><td id="c11_1">0453</td><td id="c11_2">0492</td><td id="c11_3">0531</td><td id="c11_4">0569</td><td id="c11_5">0607</td><td id="c11_6">0645</td><td id="c11_7">0682</td><td id="c11_8">0719</td><td id="c11_9">0755</td></tr><tr><th>12</th><td id="c12_0">0792</td><td id="c12_1">0828</td><td id="c12_2">0864</td><td id="c12_3">0899</td><td id="c12_4">0934</td><td id="c12_5">0969</td><td id="c12_6">1004</td><td id="c12_7">1038</td><td id="c12_8">1072</td><td id="c12_9">1106</td></tr><tr><th>13</th><td id="c13_0">1139</td><td id="c13_1">1173</td><td id="c13_2">1206</td><td id="c13_3">1239</td><td id="c13_4">1271</td><td id="c13_5">1303</td><td id="c13_6">1335</td><td id="c13_7">1367</td><td id="c13_8">1399</td><td id="c13_9">1430</td></tr><tr><th>14</th><td id="c14_0">1461</td><td id="c14_1">1492</td><td id="c14_2">1523</td><td id="c14_3">1553</td><td id="c14_4">1584</td><td id="c14_5">1614</td><td id="c14_6">1644</td><td id="c14_7">1673</td><td id="c14_8">1703</td><td id="c14_9">1732</td></tr><tr><th>15</th><td id="c15_0">1761</td><td id="c15_1">1790</td><td id="c15_2">1818</td><td id="c15_3">1847</td><td id="c15_4">1875</td><td id="c15_5">1903</td><td id="c15_6">1931</td><td id="c15_7">1959</td><td id="c15_8">1987</td><td id="c15_9">2014</td></tr><tr><th>16</th><td id="c16_0">2041</td><td id="c16_1">2068</td><td id="c16_2">2095</td><td id="c16_3">2122</td><td id="c16_4">2148</td><td id="c16_5">2175</td><td id="c16_6">2201</td><td id="c16_7">2227</td><td id="c16_8">2253</td><td id="c16_9">2279</td></tr><tr><th>17</th><td id="c17_0">2304</td><td id="c17_1">2330</td><td id="c17_2">2355</td><td id="c17_3">2380</td><td id="c17_4">2405</td><td id="c17_5">2430</td><td id="c17_6">2455</td><td id="c17_7">2480</td><td id="c17_8">2504</td><td id="c17_9">2529</td></tr><tr><th>18</th><td id="c18_0">2553</td><td id="c18_1">2577</td><td id="c18_2">2601</td><td id="c18_3">2625</td><td id="c18_4">2648</td><td id="c18_5">2672</td><td id="c18_6">2695</td><td id="c18_7">2718</td><td id="c18_8">2742</td><td id="c18_9">2765</td></tr><tr><th>19</th><td id="c19_0">2788</td><td id="c19_1">2810</td><td id="c19_2">2833</td><td id="c19_3">2856</td><td id="c19_4">2878</td><td id="c19_5">2900</td><td id="c19_6">2923</td><td id="c19_7">2945</td><td id="c19_8">2967</td><td id="c19_9">2989</td></tr><tr><th>20</th><td id="c20_0">3010</td><td id="c20_1">3032</td><td id="c20_2">3054</td><td id="c20_3">3075</td><td id="c20_4">3096</td><td id="c20_5">3118</td><td id="c20_6">3139</td><td id="c20_7">3160</td><td id="c20_8">3181</td><td id="c20_9">3201</td></tr><tr><th>21</th><td id="c21_0">3222</td><td id="c21_1">3243</td><td id="c21_2">3263</td><td id="c21_3">3284</td><td id="c21_4">3304</td><td id="c21_5">3324</td><td id="c21_6">3345</td><td id="c21_7">3365</td><td id="c21_8">3385</td><td id="c21_9">3404</td></tr><tr><th>22</th><td id="c22_0">3424</td><td id="c22_1">3444</td><td id="c22_2">3464</td><td id="c22_3">3483</td><td id="c22_4">3502</td><td id="c22_5">3522</td><td id="c22_6">3541</td><td id="c22_7">3560</td><td id="c22_8">3579</td><td id="c22_9">3598</td></tr><tr><th>23</th><td id="c23_0">3617</td><td id="c23_1">3636</td><td id="c23_2">3655</td><td id="c23_3">3674</td><td id="c23_4">3692</td><td id="c23_5">3711</td><td id="c23_6">3729</td><td id="c23_7">3747</td><td id="c23_8">3766</td><td id="c23_9">3784</td></tr><tr><th>24</th><td id="c24_0">3802</td><td id="c24_1">3820</td><td id="c24_2">3838</td><td id="c24_3">3856</td><td id="c24_4">3874</td><td id="c24_5">3892</td><td id="c24_6">3909</td><td id="c24_7">3927</td><td id="c24_8">3945</td><td id="c24_9">3962</td></tr><tr><th>25</th><td id="c25_0">3979</td><td id="c25_1">3997</td><td id="c25_2">4014</td><td id="c25_3">4031</td><td id="c25_4">4048</td><td id="c25_5">4065</td><td id="c25_6">4082</td><td id="c25_7">4099</td><td id="c25_8">4116</td><td id="c25_9">4133</td></tr><tr><th>26</th><td id="c26_0">4150</td><td id="c26_1">4166</td><td id="c26_2">4183</td><td id="c26_3">4200</td><td id="c26_4">4216</td><td id="c26_5">4232</td><td id="c26_6">4249</td><td id="c26_7">4265</td><td id="c26_8">4281</td><td id="c26_9">4298</td></tr><tr><th>27</th><td id="c27_0">4314</td><td id="c27_1">4330</td><td id="c27_2">4346</td><td id="c27_3">4362</td><td id="c27_4">4378</td><td id="c27_5">4393</td><td id="c27_6">4409</td><td id="c27_7">4425</td><td id="c27_8">4440</td><td id="c27_9">4456</td></tr><tr><th>28</th><td id="c28_0">4472</td><td id="c28_1">4487</td><td id="c28_2">4502</td><td id="c28_3">4518</td><td id="c28_4">4533</td><td id="c28_5">4548</td><td id="c28_6">4564</td><td id="c28_7">4579</td><td id="c28_8">4594</td><td id="c28_9">4609</td></tr><tr><th>29</th><td id="c29_0">4624</td><td id="c29_1">4639</td><td id="c29_2">4654</td><td id="c29_3">4669</td><td id="c29_4">4683</td><td id="c29_5">4698</td><td id="c29_6">4713</td><td id="c29_7">4728</td><td id="c29_8">4742</td><td id="c29_9">4757</td></tr><tr><th>30</th><td id="c30_0">4771</td><td id="c30_1">4786</td><td id="c30_2">4800</td><td id="c30_3">4814</td><td id="c30_4">4829</td><td id="c30_5">4843</td><td id="c30_6">4857</td><td id="c30_7">4871</td><td id="c30_8">4886</td><td id="c30_9">4900</td></tr><tr><th>31</th><td id="c31_0">4914</td><td id="c31_1">4928</td><td id="c31_2">4942</td><td id="c31_3">4955</td><td id="c31_4">4969</td><td id="c31_5">4983</td><td id="c31_6">4997</td><td id="c31_7">5011</td><td id="c31_8">5024</td><td id="c31_9">5038</td></tr><tr><th>32</th><td id="c32_0">5051</td><td id="c32_1">5065</td><td id="c32_2">5079</td><td id="c32_3">5092</td><td id="c32_4">5105</td><td id="c32_5">5119</td><td id="c32_6">5132</td><td id="c32_7">5145</td><td id="c32_8">5159</td><td id="c32_9">5172</td></tr><tr><th>33</th><td id="c33_0">5185</td><td id="c33_1">5198</td><td id="c33_2">5211</td><td id="c33_3">5224</td><td id="c33_4">5237</td><td id="c33_5">5250</td><td id="c33_6">5263</td><td id="c33_7">5276</td><td id="c33_8">5289</td><td id="c33_9">5302</td></tr><tr><th>34</th><td id="c34_0">5315</td><td id="c34_1">5328</td><td id="c34_2">5340</td><td id="c34_3">5353</td><td id="c34_4">5366</td><td id="c34_5">5378</td><td id="c34_6">5391</td><td id="c34_7">5403</td><td id="c34_8">5416</td><td id="c34_9">5428</td></tr><tr><th>35</th><td id="c35_0">5441</td><td id="c35_1">5453</td><td id="c35_2">5465</td><td id="c35_3">5478</td><td id="c35_4">5490</td><td id="c35_5">5502</td><td id="c35_6">5514</td><td id="c35_7">5527</td><td id="c35_8">5539</td><td id="c35_9">5551</td></tr><tr><th>36</th><td id="c36_0">5563</td><td id="c36_1">5575</td><td id="c36_2">5587</td><td id="c36_3">5599</td><td id="c36_4">5611</td><td id="c36_5">5623</td><td id="c36_6">5635</td><td id="c36_7">5647</td><td id="c36_8">5658</td><td id="c36_9">5670</td></tr><tr><th>37</th><td id="c37_0">5682</td><td id="c37_1">5694</td><td id="c37_2">5705</td><td id="c37_3">5717</td><td id="c37_4">5729</td><td id="c37_5">5740</td><td id="c37_6">5752</td><td id="c37_7">5763</td><td id="c37_8">5775</td><td id="c37_9">5786</td></tr><tr><th>38</th><td id="c38_0">5798</td><td id="c38_1">5809</td><td id="c38_2">5821</td><td id="c38_3">5832</td><td id="c38_4">5843</td><td id="c38_5">5855</td><td id="c38_6">5866</td><td id="c38_7">5877</td><td id="c38_8">5888</td><td id="c38_9">5899</td></tr><tr><th>39</th><td id="c39_0">5911</td><td id="c39_1">5922</td><td id="c39_2">5933</td><td id="c39_3">5944</td><td id="c39_4">5955</td><td id="c39_5">5966</td><td id="c39_6">5977</td><td id="c39_7">5988</td><td id="c39_8">5999</td><td id="c39_9">6010</td></tr><tr><th>40</th><td id="c40_0">6021</td><td id="c40_1">6031</td><td id="c40_2">6042</td><td id="c40_3">6053</td><td id="c40_4">6064</td><td id="c40_5">6075</td><td id="c40_6">6085</td><td id="c40_7">6096</td><td id="c40_8">6107</td><td id="c40_9">6117</td></tr><tr><th>41</th><td id="c41_0">6128</td><td id="c41_1">6138</td><td id="c41_2">6149</td><td id="c41_3">6160</td><td id="c41_4">6170</td><td id="c41_5">6180</td><td id="c41_6">6191</td><td id="c41_7">6201</td><td id="c41_8">6212</td><td id="c41_9">6222</td></tr><tr><th>42</th><td id="c42_0">6232</td><td id="c42_1">6243</td><td id="c42_2">6253</td><td id="c42_3">6263</td><td id="c42_4">6274</td><td id="c42_5">6284</td><td id="c42_6">6294</td><td id="c42_7">6304</td><td id="c42_8">6314</td><td id="c42_9">6325</td></tr><tr><th>43</th><td id="c43_0">6335</td><td id="c43_1">6345</td><td id="c43_2">6355</td><td id="c43_3">6365</td><td id="c43_4">6375</td><td id="c43_5">6385</td><td id="c43_6">6395</td><td id="c43_7">6405</td><td id="c43_8">6415</td><td id="c43_9">6425</td></tr><tr><th>44</th><td id="c44_0">6435</td><td id="c44_1">6444</td><td id="c44_2">6454</td><td id="c44_3">6464</td><td id="c44_4">6474</td><td id="c44_5">6484</td><td id="c44_6">6493</td><td id="c44_7">6503</td><td id="c44_8">6513</td><td id="c44_9">6522</td></tr><tr><th>45</th><td id="c45_0">6532</td><td id="c45_1">6542</td><td id="c45_2">6551</td><td id="c45_3">6561</td><td id="c45_4">6571</td><td id="c45_5">6580</td><td id="c45_6">6590</td><td id="c45_7">6599</td><td id="c45_8">6609</td><td id="c45_9">6618</td></tr><tr><th>46</th><td id="c46_0">6628</td><td id="c46_1">6637</td><td id="c46_2">6646</td><td id="c46_3">6656</td><td id="c46_4">6665</td><td id="c46_5">6675</td><td id="c46_6">6684</td><td id="c46_7">6693</td><td id="c46_8">6702</td><td id="c46_9">6712</td></tr><tr><th>47</th><td id="c47_0">6721</td><td id="c47_1">6730</td><td id="c47_2">6739</td><td id="c47_3">6749</td><td id="c47_4">6758</td><td id="c47_5">6767</td><td id="c47_6">6776</td><td id="c47_7">6785</td><td id="c47_8">6794</td><td id="c47_9">6803</td></tr><tr><th>48</th><td id="c48_0">6812</td><td id="c48_1">6821</td><td id="c48_2">6830</td><td id="c48_3">6839</td><td id="c48_4">6848</td><td id="c48_5">6857</td><td id="c48_6">6866</td><td id="c48_7">6875</td><td id="c48_8">6884</td><td id="c48_9">6893</td></tr><tr><th>49</th><td id="c49_0">6902</td><td id="c49_1">6911</td><td id="c49_2">6920</td><td id="c49_3">6928</td><td id="c49_4">6937</td><td id="c49_5">6946</td><td id="c49_6">6955</td><td id="c49_7">6964</td><td id="c49_8">6972</td><td id="c49_9">6981</td></tr><tr><th>50</th><td id="c50_0">6990</td><td id="c50_1">6998</td><td id="c50_2">7007</td><td id="c50_3">7016</td><td id="c50_4">7024</td><td id="c50_5">7033</td><td id="c50_6">7042</td><td id="c50_7">7050</td><td id="c50_8">7059</td><td id="c50_9">7067</td></tr><tr><th>51</th><td id="c51_0">7076</td><td id="c51_1">7084</td><td id="c51_2">7093</td><td id="c51_3">7101</td><td id="c51_4">7110</td><td id="c51_5">7118</td><td id="c51_6">7126</td><td id="c51_7">7135</td><td id="c51_8">7143</td><td id="c51_9">7152</td></tr><tr><th>52</th><td id="c52_0">7160</td><td id="c52_1">7168</td><td id="c52_2">7177</td><td id="c52_3">7185</td><td id="c52_4">7193</td><td id="c52_5">7202</td><td id="c52_6">7210</td><td id="c52_7">7218</td><td id="c52_8">7226</td><td id="c52_9">7235</td></tr><tr><th>53</th><td id="c53_0">7243</td><td id="c53_1">7251</td><td id="c53_2">7259</td><td id="c53_3">7267</td><td id="c53_4">7275</td><td id="c53_5">7284</td><td id="c53_6">7292</td><td id="c53_7">7300</td><td id="c53_8">7308</td><td id="c53_9">7316</td></tr><tr><th>54</th><td id="c54_0">7324</td><td id="c54_1">7332</td><td id="c54_2">7340</td><td id="c54_3">7348</td><td id="c54_4">7356</td><td id="c54_5">7364</td><td id="c54_6">7372</td><td id="c54_7">7380</td><td id="c54_8">7388</td><td id="c54_9">7396</td></tr><tr><th>55</th><td id="c55_0">7404</td><td id="c55_1">7412</td><td id="c55_2">7419</td><td id="c55_3">7427</td><td id="c55_4">7435</td><td id="c55_5">7443</td><td id="c55_6">7451</td><td id="c55_7">7459</td><td id="c55_8">7466</td><td id="c55_9">7474</td></tr><tr><th>56</th><td id="c56_0">7482</td><td id="c56_1">7490</td><td id="c56_2">7497</td><td id="c56_3">7505</td><td id="c56_4">7513</td><td id="c56_5">7520</td><td id="c56_6">7528</td><td id="c56_7">7536</td><td id="c56_8">7543</td><td id="c56_9">7551</td></tr><tr><th>57</th><td id="c57_0">7559</td><td id="c57_1">7566</td><td id="c57_2">7574</td><td id="c57_3">7582</td><td id="c57_4">7589</td><td id="c57_5">7597</td><td id="c57_6">7604</td><td id="c57_7">7612</td><td id="c57_8">7619</td><td id="c57_9">7627</td></tr><tr><th>58</th><td id="c58_0">7634</td><td id="c58_1">7642</td><td id="c58_2">7649</td><td id="c58_3">7657</td><td id="c58_4">7664</td><td id="c58_5">7672</td><td id="c58_6">7679</td><td id="c58_7">7686</td><td id="c58_8">7694</td><td id="c58_9">7701</td></tr><tr><th>59</th><td id="c59_0">7709</td><td id="c59_1">7716</td><td id="c59_2">7723</td><td id="c59_3">7731</td><td id="c59_4">7738</td><td id="c59_5">7745</td><td id="c59_6">7752</td><td id="c59_7">7760</td><td id="c59_8">7767</td><td id="c59_9">7774</td></tr><tr><th>60</th><td id="c60_0">7782</td><td id="c60_1">7789</td><td id="c60_2">7796</td><td id="c60_3">7803</td><td id="c60_4">7810</td><td id="c60_5">7818</td><td id="c60_6">7825</td><td id="c60_7">7832</td><td id="c60_8">7839</td><td id="c60_9">7846</td></tr><tr><th>61</th><td id="c61_0">7853</td><td id="c61_1">7860</td><td id="c61_2">7868</td><td id="c61_3">7875</td><td id="c61_4">7882</td><td id="c61_5">7889</td><td id="c61_6">7896</td><td id="c61_7">7903</td><td id="c61_8">7910</td><td id="c61_9">7917</td></tr><tr><th>62</th><td id="c62_0">7924</td><td id="c62_1">7931</td><td id="c62_2">7938</td><td id="c62_3">7945</td><td id="c62_4">7952</td><td id="c62_5">7959</td><td id="c62_6">7966</td><td id="c62_7">7973</td><td id="c62_8">7980</td><td id="c62_9">7987</td></tr><tr><th>63</th><td id="c63_0">7993</td><td id="c63_1">8000</td><td id="c63_2">8007</td><td id="c63_3">8014</td><td id="c63_4">8021</td><td id="c63_5">8028</td><td id="c63_6">8035</td><td id="c63_7">8041</td><td id="c63_8">8048</td><td id="c63_9">8055</td></tr><tr><th>64</th><td id="c64_0">8062</td><td id="c64_1">8069</td><td id="c64_2">8075</td><td id="c64_3">8082</td><td id="c64_4">8089</td><td id="c64_5">8096</td><td id="c64_6">8102</td><td id="c64_7">8109</td><td id="c64_8">8116</td><td id="c64_9">8122</td></tr><tr><th>65</th><td id="c65_0">8129</td><td id="c65_1">8136</td><td id="c65_2">8142</td><td id="c65_3">8149</td><td id="c65_4">8156</td><td id="c65_5">8162</td><td id="c65_6">8169</td><td id="c65_7">8176</td><td id="c65_8">8182</td><td id="c65_9">8189</td></tr><tr><th>66</th><td id="c66_0">8195</td><td id="c66_1">8202</td><td id="c66_2">8209</td><td id="c66_3">8215</td><td id="c66_4">8222</td><td id="c66_5">8228</td><td id="c66_6">8235</td><td id="c66_7">8241</td><td id="c66_8">8248</td><td id="c66_9">8254</td></tr><tr><th>67</th><td id="c67_0">8261</td><td id="c67_1">8267</td><td id="c67_2">8274</td><td id="c67_3">8280</td><td id="c67_4">8287</td><td id="c67_5">8293</td><td id="c67_6">8299</td><td id="c67_7">8306</td><td id="c67_8">8312</td><td id="c67_9">8319</td></tr><tr><th>68</th><td id="c68_0">8325</td><td id="c68_1">8331</td><td id="c68_2">8338</td><td id="c68_3">8344</td><td id="c68_4">8351</td><td id="c68_5">8357</td><td id="c68_6">8363</td><td id="c68_7">8370</td><td id="c68_8">8376</td><td id="c68_9">8382</td></tr><tr><th>69</th><td id="c69_0">8388</td><td id="c69_1">8395</td><td id="c69_2">8401</td><td id="c69_3">8407</td><td id="c69_4">8414</td><td id="c69_5">8420</td><td id="c69_6">8426</td><td id="c69_7">8432</td><td id="c69_8">8439</td><td id="c69_9">8445</td></tr><tr><th>70</th><td id="c70_0">8451</td><td id="c70_1">8457</td><td id="c70_2">8463</td><td id="c70_3">8470</td><td id="c70_4">8476</td><td id="c70_5">8482</td><td id="c70_6">8488</td><td id="c70_7">8494</td><td id="c70_8">8500</td><td id="c70_9">8506</td></tr><tr><th>71</th><td id="c71_0">8513</td><td id="c71_1">8519</td><td id="c71_2">8525</td><td id="c71_3">8531</td><td id="c71_4">8537</td><td id="c71_5">8543</td><td id="c71_6">8549</td><td id="c71_7">8555</td><td id="c71_8">8561</td><td id="c71_9">8567</td></tr><tr><th>72</th><td id="c72_0">8573</td><td id="c72_1">8579</td><td id="c72_2">8585</td><td id="c72_3">8591</td><td id="c72_4">8597</td><td id="c72_5">8603</td><td id="c72_6">8609</td><td id="c72_7">8615</td><td id="c72_8">8621</td><td id="c72_9">8627</td></tr><tr><th>73</th><td id="c73_0">8633</td><td id="c73_1">8639</td><td id="c73_2">8645</td><td id="c73_3">8651</td><td id="c73_4">8657</td><td id="c73_5">8663</td><td id="c73_6">8669</td><td id="c73_7">8675</td><td id="c73_8">8681</td><td id="c73_9">8686</td></tr><tr><th>74</th><td id="c74_0">8692</td><td id="c74_1">8698</td><td id="c74_2">8704</td><td id="c74_3">8710</td><td id="c74_4">8716</td><td id="c74_5">8722</td><td id="c74_6">8727</td><td id="c74_7">8733</td><td id="c74_8">8739</td><td id="c74_9">8745</td></tr><tr><th>75</th><td id="c75_0">8751</td><td id="c75_1">8756</td><td id="c75_2">8762</td><td id="c75_3">8768</td><td id="c75_4">8774</td><td id="c75_5">8779</td><td id="c75_6">8785</td><td id="c75_7">8791</td><td id="c75_8">8797</td><td id="c75_9">8802</td></tr><tr><th>76</th><td id="c76_0">8808</td><td id="c76_1">8814</td><td id="c76_2">8820</td><td id="c76_3">8825</td><td id="c76_4">8831</td><td id="c76_5">8837</td><td id="c76_6">8842</td><td id="c76_7">8848</td><td id="c76_8">8854</td><td id="c76_9">8859</td></tr><tr><th>77</th><td id="c77_0">8865</td><td id="c77_1">8871</td><td id="c77_2">8876</td><td id="c77_3">8882</td><td id="c77_4">8887</td><td id="c77_5">8893</td><td id="c77_6">8899</td><td id="c77_7">8904</td><td id="c77_8">8910</td><td id="c77_9">8915</td></tr><tr><th>78</th><td id="c78_0">8921</td><td id="c78_1">8927</td><td id="c78_2">8932</td><td id="c78_3">8938</td><td id="c78_4">8943</td><td id="c78_5">8949</td><td id="c78_6">8954</td><td id="c78_7">8960</td><td id="c78_8">8965</td><td id="c78_9">8971</td></tr><tr><th>79</th><td id="c79_0">8976</td><td id="c79_1">8982</td><td id="c79_2">8987</td><td id="c79_3">8993</td><td id="c79_4">8998</td><td id="c79_5">9004</td><td id="c79_6">9009</td><td id="c79_7">9015</td><td id="c79_8">9020</td><td id="c79_9">9025</td></tr><tr><th>80</th><td id="c80_0">9031</td><td id="c80_1">9036</td><td id="c80_2">9042</td><td id="c80_3">9047</td><td id="c80_4">9053</td><td id="c80_5">9058</td><td id="c80_6">9063</td><td id="c80_7">9069</td><td id="c80_8">9074</td><td id="c80_9">9079</td></tr><tr><th>81</th><td id="c81_0">9085</td><td id="c81_1">9090</td><td id="c81_2">9096</td><td id="c81_3">9101</td><td id="c81_4">9106</td><td id="c81_5">9112</td><td id="c81_6">9117</td><td id="c81_7">9122</td><td id="c81_8">9128</td><td id="c81_9">9133</td></tr><tr><th>82</th><td id="c82_0">9138</td><td id="c82_1">9143</td><td id="c82_2">9149</td><td id="c82_3">9154</td><td id="c82_4">9159</td><td id="c82_5">9165</td><td id="c82_6">9170</td><td id="c82_7">9175</td><td id="c82_8">9180</td><td id="c82_9">9186</td></tr><tr><th>83</th><td id="c83_0">9191</td><td id="c83_1">9196</td><td id="c83_2">9201</td><td id="c83_3">9206</td><td id="c83_4">9212</td><td id="c83_5">9217</td><td id="c83_6">9222</td><td id="c83_7">9227</td><td id="c83_8">9232</td><td id="c83_9">9238</td></tr><tr><th>84</th><td id="c84_0">9243</td><td id="c84_1">9248</td><td id="c84_2">9253</td><td id="c84_3">9258</td><td id="c84_4">9263</td><td id="c84_5">9269</td><td id="c84_6">9274</td><td id="c84_7">9279</td><td id="c84_8">9284</td><td id="c84_9">9289</td></tr><tr><th>85</th><td id="c85_0">9294</td><td id="c85_1">9299</td><td id="c85_2">9304</td><td id="c85_3">9309</td><td id="c85_4">9315</td><td id="c85_5">9320</td><td id="c85_6">9325</td><td id="c85_7">9330</td><td id="c85_8">9335</td><td id="c85_9">9340</td></tr><tr><th>86</th><td id="c86_0">9345</td><td id="c86_1">9350</td><td id="c86_2">9355</td><td id="c86_3">9360</td><td id="c86_4">9365</td><td id="c86_5">9370</td><td id="c86_6">9375</td><td id="c86_7">9380</td><td id="c86_8">9385</td><td id="c86_9">9390</td></tr><tr><th>87</th><td id="c87_0">9395</td><td id="c87_1">9400</td><td id="c87_2">9405</td><td id="c87_3">9410</td><td id="c87_4">9415</td><td id="c87_5">9420</td><td id="c87_6">9425</td><td id="c87_7">9430</td><td id="c87_8">9435</td><td id="c87_9">9440</td></tr><tr><th>88</th><td id="c88_0">9445</td><td id="c88_1">9450</td><td id="c88_2">9455</td><td id="c88_3">9460</td><td id="c88_4">9465</td><td id="c88_5">9469</td><td id="c88_6">9474</td><td id="c88_7">9479</td><td id="c88_8">9484</td><td id="c88_9">9489</td></tr><tr><th>89</th><td id="c89_0">9494</td><td id="c89_1">9499</td><td id="c89_2">9504</td><td id="c89_3">9509</td><td id="c89_4">9513</td><td id="c89_5">9518</td><td id="c89_6">9523</td><td id="c89_7">9528</td><td id="c89_8">9533</td><td id="c89_9">9538</td></tr><tr><th>90</th><td id="c90_0">9542</td><td id="c90_1">9547</td><td id="c90_2">9552</td><td id="c90_3">9557</td><td id="c90_4">9562</td><td id="c90_5">9566</td><td id="c90_6">9571</td><td id="c90_7">9576</td><td id="c90_8">9581</td><td id="c90_9">9586</td></tr><tr><th>91</th><td id="c91_0">9590</td><td id="c91_1">9595</td><td id="c91_2">9600</td><td id="c91_3">9605</td><td id="c91_4">9609</td><td id="c91_5">9614</td><td id="c91_6">9619</td><td id="c91_7">9624</td><td id="c91_8">9628</td><td id="c91_9">9633</td></tr><tr><th>92</th><td id="c92_0">9638</td><td id="c92_1">9643</td><td id="c92_2">9647</td><td id="c92_3">9652</td><td id="c92_4">9657</td><td id="c92_5">9661</td><td id="c92_6">9666</td><td id="c92_7">9671</td><td id="c92_8">9675</td><td id="c92_9">9680</td></tr><tr><th>93</th><td id="c93_0">9685</td><td id="c93_1">9689</td><td id="c93_2">9694</td><td id="c93_3">9699</td><td id="c93_4">9703</td><td id="c93_5">9708</td><td id="c93_6">9713</td><td id="c93_7">9717</td><td id="c93_8">9722</td><td id="c93_9">9727</td></tr><tr><th>94</th><td id="c94_0">9731</td><td id="c94_1">9736</td><td id="c94_2">9741</td><td id="c94_3">9745</td><td id="c94_4">9750</td><td id="c94_5">9754</td><td id="c94_6">9759</td><td id="c94_7">9763</td><td id="c94_8">9768</td><td id="c94_9">9773</td></tr><tr><th>95</th><td id="c95_0">9777</td><td id="c95_1">9782</td><td id="c95_2">9786</td><td id="c95_3">9791</td><td id="c95_4">9795</td><td id="c95_5">9800</td><td id="c95_6">9805</td><td id="c95_7">9809</td><td id="c95_8">9814</td><td id="c95_9">9818</td></tr><tr><th>96</th><td id="c96_0">9823</td><td id="c96_1">9827</td><td id="c96_2">9832</td><td id="c96_3">9836</td><td id="c96_4">9841</td><td id="c96_5">9845</td><td id="c96_6">9850</td><td id="c96_7">9854</td><td id="c96_8">9859</td><td id="c96_9">9863</td></tr><tr><th>97</th><td id="c97_0">9868</td><td id="c97_1">9872</td><td id="c97_2">9877</td><td id="c97_3">9881</td><td id="c97_4">9886</td><td id="c97_5">9890</td><td id="c97_6">9894</td><td id="c97_7">9899</td><td id="c97_8">9903</td><td id="c97_9">9908</td></tr><tr><th>98</th><td id="c98_0">9912</td><td id="c98_1">9917</td><td id="c98_2">9921</td><td id="c98_3">9926</td><td id="c98_4">9930</td><td id="c98_5">9934</td><td id="c98_6">9939</td><td id="c98_7">9943</td><td id="c98_8">9948</td><td id="c98_9">9952</td></tr><tr><th>99</th><td id="c99_0">9956</td><td id="c99_1">9961</td><td id="c99_2">9965</td><td id="c99_3">9969</td><td id="c99_4">9974</td><td id="c99_5">9978</td><td id="c99_6">9983</td><td id="c99_7">9987</td><td id="c99_8">9991</td><td id="c99_9">9996</td></tr></table>
+
+<h3>常用数值速记卡</h3>
+<table>
+<tr><th>数</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>e</td><td>π</td></tr>
+<tr><th>lg</th><td>.3010</td><td>.4771</td><td>.6021</td><td>.6990</td><td>.7782</td><td>.8451</td><td>.9031</td><td>.9542</td><td>.4343</td><td>.4971</td></tr>
+</table>
+<div class="box key">
+<b>记住三个“神奇巧合”，课堂效果极佳：</b>
+<ol style="margin-bottom:0">
+<li><b>lg2 + lg5 = 1</b>（因为 2×5 = 10）</li>
+<li><b>2¹⁰ = 1024 ≈ 10³</b> —— 所以“翻 10 次倍 ≈ 大 1000 倍”。电脑里的 KB/MB/GB 就是这么来的（1024 而不是 1000）！</li>
+<li><b>lg2 ≈ 0.301</b> —— 所以工程中“<b>×2 就是 +3 dB</b>”，因为 10 × 0.301 ≈ 3</li>
+</ol>
+</div>
+
+<p class="center" style="color:#94a3b8;margin-top:50px;font-size:14px">
+本文档由 π 生成 · 可直接用浏览器打开，或 ⌘+P 打印/导出 PDF · 所有表格、插图与动画均为自包含，无需联网</p>
+
+<script>
+(function () {
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  var LG = function (v) { return Math.log10(v); };
+  function $(id) { return document.getElementById(id); }
+  function el(n, at, p) { var e = document.createElementNS(NS, n); for (var k in at) e.setAttribute(k, at[k]); if (p) p.appendChild(e); return e; }
+  function txt(p, x, y, s, at) { at = at || {}; at.x = x; at.y = y; var t = el("text", at, p); t.textContent = s; return t; }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function tween(dur, fn, done) {
+    var t0 = performance.now();
+    function ease(p) { return p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+    function f(t) { var p = Math.min(1, (t - t0) / dur); fn(ease(p)); if (p < 1) requestAnimationFrame(f); else if (done) done(); }
+    requestAnimationFrame(f);
+  }
+  function sci(v) {
+    if (v <= 0) return "0";
+    var e = Math.floor(LG(v));
+    var man = v / Math.pow(10, e);
+    if (Math.abs(man - 1) < 0.005 && e !== 0) return "10^" + e;
+    if (e >= -3 && e <= 5) {
+      var d = Math.max(0, Math.min(6, 4 - e));
+      var s = v.toFixed(d);
+      if (s.indexOf(".") >= 0) s = s.replace(/0+$/, "").replace(/\.$/, "");
+      return s;
+    }
+    return (v / Math.pow(10, e)).toFixed(2) + "×10^" + e;
+  }
+
+  /* ============ 0. 滚动渐显 + 曲线描线 ============ */
+  try {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".rv").forEach(function (n) { io.observe(n); });
+    document.querySelectorAll("svg polyline, svg line.drawline").forEach(function (pl) {
+      try {
+        var L = pl.getTotalLength();
+        pl.style.setProperty("--len", L);
+        pl.classList.add("drawline");
+        io.observe(pl);
+      } catch (e) {}
+    });
+  } catch (e) {}
+
+  /* ============ 1. 跳格子动画（4 x 8） ============ */
+  try {
+    var hopSvg = $("hopSvg");
+    var POW = [1, 2, 4, 8, 16, 32, 64, 128, 256];
+    var hx = function (i) { return 70 + i * 100; };
+    var hy = 78;
+    el("rect", { x: 0, y: 0, width: 900, height: 150, fill: "#fffdf7" }, hopSvg);
+    el("line", { x1: hx(0), y1: hy, x2: hx(8), y2: hy, stroke: "#333", "stroke-width": 3 }, hopSvg);
+    var segs = [];
+    for (var i = 0; i < 8; i++) {
+      segs.push(el("line", { x1: hx(i), y1: hy, x2: hx(i + 1), y2: hy, stroke: "#f59e0b", "stroke-width": 6, opacity: 0.15 }, hopSvg));
+    }
+    for (i = 0; i <= 8; i++) {
+      el("line", { x1: hx(i), y1: hy, x2: hx(i), y2: hy + 14, stroke: "#999" }, hopSvg);
+      txt(hopSvg, hx(i), hy - 16, POW[i], { "text-anchor": "middle", "font-size": 16, "font-weight": "bold", fill: "#123" });
+      txt(hopSvg, hx(i), hy + 34, i + " 格", { "text-anchor": "middle", "font-size": 12, fill: "#059669" });
+    }
+    var dotG = el("g", {}, hopSvg);
+    el("circle", { cx: 0, cy: hy, r: 10, fill: "#e11d48", stroke: "#fff", "stroke-width": 3 }, dotG);
+    dotG.style.transition = "transform .45s cubic-bezier(.3,1.5,.5,1)";
+    var hopA = $("hopA"), hopB = $("hopB"), hopOut = $("hopOut");
+    [1, 2, 4, 8, 16].forEach(function (v) {
+      hopA.add(new Option(v, v)); hopB.add(new Option(v, v));
+    });
+    hopA.value = "4"; hopB.value = "8";
+    var busy = false;
+    function hopReset() {
+      dotG.style.transform = "translate(" + hx(0) + "px,0)";
+      segs.forEach(function (s) { s.setAttribute("opacity", 0.15); });
+      hopOut.innerHTML = "格数：0 + 0 = 0　⇒　还没开始跳";
+    }
+    hopReset();
+    $("hopReset").onclick = hopReset;
+    $("hopPlay").onclick = async function () {
+      if (busy) return; busy = true;
+      hopReset(); await sleep(200);
+      var p = LG(+hopA.value), q = LG(+hopB.value);
+      var cur = 0;
+      for (var k = 0; k < p; k++) {
+        segs[cur].setAttribute("opacity", 1); cur++;
+        dotG.style.transform = "translate(" + hx(cur) + "px,0)";
+        hopOut.innerHTML = "第一段：跳了 <b>" + cur + "</b> 格　⇒　现在在 <b>" + POW[cur] + "</b>";
+        await sleep(520);
+      }
+      var first = cur;
+      for (k = 0; k < q; k++) {
+        segs[cur].setAttribute("opacity", 1); cur++;
+        dotG.style.transform = "translate(" + hx(cur) + "px,0)";
+        hopOut.innerHTML = "格数：<b>" + first + "</b> + <b>" + (cur - first) + "</b>　⇒　现在在 <b>" + POW[cur] + "</b>";
+        await sleep(520);
+      }
+      hopOut.innerHTML = "格数：<b>" + first + " + " + (cur - first) + " = " + cur + "</b>　⇒　2^" + cur + " = <b>" + POW[cur] +
+        "</b>　∴　" + (+hopA.value) + " × " + (+hopB.value) + " = <b>" + POW[cur] + "</b> 🎉";
+      hopOut.classList.remove("pop"); void hopOut.offsetWidth; hopOut.classList.add("pop");
+      busy = false;
+    };
+  } catch (e) { console.warn("hop", e); }
+
+  /* ============ 2. 347x86 分步动画（柱状图） ============ */
+  try {
+    var barSvg = $("barSvg");
+    var BASE = 215, SC = 38;
+    var L1 = 2.5403, L2 = 1.9345, LS = L1 + L2;
+    el("rect", { x: 0, y: 0, width: 560, height: 250, fill: "#fffdf7" }, barSvg);
+    el("line", { x1: 30, y1: BASE, x2: 530, y2: BASE, stroke: "#333", "stroke-width": 2 }, barSvg);
+    for (var u = 0; u <= 5; u++) {
+      el("line", { x1: 30, y1: BASE - u * SC, x2: 530, y2: BASE - u * SC, stroke: "#e5e7eb" }, barSvg);
+      txt(barSvg, 26, BASE - u * SC + 4, u, { "text-anchor": "end", "font-size": 11, fill: "#888" });
+    }
+    txt(barSvg, 16, 30, "对数值（格数）", { "font-size": 12, fill: "#888" });
+    function bar(x, w, color) {
+      var r = el("rect", { x: x, y: BASE, width: w, height: 0, fill: color, rx: 3 }, barSvg);
+      return r;
+    }
+    function setH(r, h) { r.setAttribute("height", h); r.setAttribute("y", BASE - h); }
+    var b1 = bar(70, 80, "#3b82c4"), b2 = bar(200, 80, "#d1762b");
+    var s1 = bar(380, 80, "#3b82c4"), s2 = bar(380, 80, "#d1762b");
+    var lab1 = txt(barSvg, 110, BASE - 8, "", { "text-anchor": "middle", "font-size": 14, "font-weight": "bold", fill: "#1c5f96" });
+    var lab2 = txt(barSvg, 240, BASE - 8, "", { "text-anchor": "middle", "font-size": 14, "font-weight": "bold", fill: "#a4541a" });
+    var labS = txt(barSvg, 420, BASE - 8, "", { "text-anchor": "middle", "font-size": 15, "font-weight": "bold", fill: "#e11d48" });
+    txt(barSvg, 110, BASE + 20, "lg 347", { "text-anchor": "middle", "font-size": 13, fill: "#333" });
+    txt(barSvg, 240, BASE + 20, "lg 86", { "text-anchor": "middle", "font-size": 13, fill: "#333" });
+    txt(barSvg, 420, BASE + 20, "相加 = 答案的对数", { "text-anchor": "middle", "font-size": 13, fill: "#333" });
+    var plusT = txt(barSvg, 165, BASE - 60, "", { "font-size": 26, "font-weight": "bold", fill: "#e11d48", "text-anchor": "middle" });
+    var eqT = txt(barSvg, 310, BASE - 60, "", { "font-size": 26, "font-weight": "bold", fill: "#e11d48", "text-anchor": "middle" });
+    var resT = txt(barSvg, 420, 40, "", { "font-size": 22, "font-weight": "bold", fill: "#e11d48", "text-anchor": "middle" });
+
+    var lines = document.querySelectorAll("#calc1 .st");
+    var step = 0;
+    function showLine(i) {
+      lines.forEach(function (n, k) { n.classList.toggle("on", k <= i); n.classList.toggle("cur", k === i); });
+    }
+    function resetBars() {
+      [b1, b2, s1, s2].forEach(function (r) { setH(r, 0); });
+      lab1.textContent = lab2.textContent = labS.textContent = "";
+      plusT.textContent = eqT.textContent = resT.textContent = "";
+      lines.forEach(function (n) { n.classList.remove("on", "cur"); });
+    }
+    resetBars();
+    var steps = [
+      function (d) { // 查表：两根柱子长出来
+        showLine(0);
+        tween(700, function (p) { setH(b1, L1 * SC * p); lab1.textContent = (L1 * p).toFixed(4); lab1.setAttribute("y", BASE - L1 * SC * p - 8); });
+        tween(700, function (p) { setH(b2, L2 * SC * p); lab2.textContent = (L2 * p).toFixed(4); lab2.setAttribute("y", BASE - L2 * SC * p - 8); });
+      },
+      function (d) { // 相加：叠起来
+        showLine(1);
+        plusT.textContent = "+"; eqT.textContent = "=";
+        tween(600, function (p) { setH(s1, L1 * SC * p); });
+        setTimeout(function () {
+          tween(600, function (p) { setH(s2, L2 * SC * p); s2.setAttribute("y", BASE - L1 * SC - L2 * SC * p); });
+        }, 550);
+        setTimeout(function () {
+          tween(500, function (p) { labS.textContent = (LS * p).toFixed(4); labS.setAttribute("y", BASE - LS * SC - 8); });
+        }, 1100);
+      },
+      function (d) { showLine(2); },
+      function (d) { showLine(3); resT.textContent = "⇒ 29840"; resT.classList.add("pop"); },
+      function (d) { showLine(4); }
+    ];
+    $("cpNext").onclick = function () { if (step < steps.length) { steps[step](true); step++; } };
+    $("cpReset").onclick = function () { step = 0; resetBars(); };
+    $("cpAuto").onclick = async function () {
+      step = 0; resetBars(); await sleep(250);
+      for (var i = 0; i < steps.length; i++) { steps[i](); step = i + 1; await sleep(i === 1 ? 2100 : 1500); }
+    };
+  } catch (e) { console.warn("bars", e); }
+
+  /* ============ 3. 交互计算尺 ============ */
+  try {
+    var rs = $("ruleSvg");
+    var x0 = 60, DEC = 390, yA = 82, yB = 172;
+    var AX = function (v) { return x0 + DEC * LG(v); };
+    el("rect", { x: 0, y: 0, width: 900, height: 240, fill: "#fffdf7" }, rs);
+    el("rect", { x: x0 - 12, y: yA - 12, width: DEC * 2 + 24, height: 46, rx: 6, fill: "#d7ecff", stroke: "#3b82c4", "stroke-width": 2 }, rs);
+    txt(rs, x0 - 12, yA - 26, "尺子 A（固定，1 ~ 100）", { "font-size": 14, fill: "#1c5f96", "font-weight": "bold" });
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].forEach(function (v) {
+      var big = [1, 2, 3, 10, 20, 30, 100].indexOf(v) >= 0;
+      el("line", { x1: AX(v), y1: yA, x2: AX(v), y2: yA + (big ? 24 : 14), stroke: "#1c5f96", "stroke-width": big ? 3 : 1 }, rs);
+      txt(rs, AX(v), yA - 14, v, { "text-anchor": "middle", "font-size": big ? 16 : 11, "font-weight": big ? "bold" : "normal", fill: "#123" }, rs);
+    });
+    var gB = el("g", {}, rs);
+    el("rect", { x: x0 - 12, y: yB - 12, width: DEC + 24, height: 46, rx: 6, fill: "#ffe6d1", stroke: "#d1762b", "stroke-width": 2 }, gB);
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(function (v) {
+      var big = [1, 2, 3, 6, 10].indexOf(v) >= 0;
+      el("line", { x1: AX(v), y1: yB, x2: AX(v), y2: yB + (big ? 24 : 14), stroke: "#a4541a", "stroke-width": big ? 3 : 1 }, gB);
+      txt(gB, AX(v), yB - 14, v, { "text-anchor": "middle", "font-size": big ? 16 : 11, "font-weight": big ? "bold" : "normal", fill: "#123" });
+    });
+    txt(rs, x0 - 12, yB + 62, "尺子 B（会滑动，1 ~ 10）", { "font-size": 14, fill: "#a4541a", "font-weight": "bold" });
+    var redM = el("g", {}, rs);
+    el("line", { x1: 0, y1: yA + 26, x2: 0, y2: yB - 12, stroke: "#e11d48", "stroke-width": 2, "stroke-dasharray": "5 4" }, redM);
+    el("circle", { cx: 0, cy: yB - 2, r: 6, fill: "#e11d48" }, redM);
+    var greenM = el("g", {}, rs);
+    el("line", { x1: 0, y1: yA + 26, x2: 0, y2: yB - 12, stroke: "#059669", "stroke-width": 2.5, "stroke-dasharray": "5 4" }, greenM);
+    el("circle", { cx: 0, cy: yA + 26, r: 6, fill: "#059669" }, greenM);
+    el("circle", { cx: 0, cy: yB - 2, r: 6, fill: "#059669" }, greenM);
+    [gB, redM, greenM].forEach(function (g) { g.style.transition = "transform .85s cubic-bezier(.35,1.3,.45,1)"; });
+    var rA = $("rA"), rB = $("rB"), rOut = $("rOut");
+    function ruleUpdate() {
+      var a = +rA.value, b = +rB.value, p = a * b;
+      gB.style.transform = "translate(" + (DEC * LG(a)) + "px,0)";
+      redM.style.transform = "translate(" + AX(a) + "px,0)";
+      greenM.style.transform = "translate(" + AX(p) + "px,0)";
+      rOut.innerHTML = "lg" + a + " + lg" + b + " = " + LG(a).toFixed(4) + " + " + LG(b).toFixed(4) +
+        " = <b>" + LG(p).toFixed(4) + "</b> = lg" + p + "　⇒　" + a + " × " + b + " = <b>" + p + "</b>";
+    }
+    rA.oninput = ruleUpdate; rB.oninput = ruleUpdate;
+    ruleUpdate();
+    var demoPairs = [[2, 3], [4, 5], [7, 8], [9, 9], [3, 6], [6, 7]], di = 0, dtimer = null;
+    $("rDemo").onclick = function () {
+      if (dtimer) { clearInterval(dtimer); dtimer = null; return; }
+      dtimer = setInterval(function () {
+        var pr = demoPairs[di % demoPairs.length]; di++;
+        rA.value = pr[0]; rB.value = pr[1]; ruleUpdate();
+        if (di % demoPairs.length === 0) { clearInterval(dtimer); dtimer = null; }
+      }, 1500);
+    };
+  } catch (e) { console.warn("rule", e); }
+
+  /* ============ 4. 对数表自动查表 ============ */
+  try {
+    var lastHit = null;
+    function lookup() {
+      var v = parseFloat($("lkNum").value);
+      var out = $("lkOut");
+      if (!isFinite(v) || v <= 0) { out.innerHTML = "请输入一个 <b>正数</b> 哦～"; return; }
+      var e = Math.floor(LG(v));
+      var m = v / Math.pow(10, e);           // 1 <= m < 10
+      if (m >= 10) { m /= 10; e++; }
+      var t = m * 10;                        // 10 <= t < 100
+      var row = Math.floor(t), col = Math.round((t - row) * 10);
+      if (col === 10) { col = 0; row += 1; }
+      if (row > 99) { row = 99; col = 9; }
+      var cell = $("c" + row + "_" + col);
+      var mant = cell ? cell.textContent : "????";
+      if (lastHit) lastHit.classList.remove("hit");
+      if (cell) {
+        cell.classList.add("hit"); lastHit = cell;
+        cell.scrollIntoView({ block: "center", behavior: "smooth" });
+        cell.classList.remove("pop"); void cell.offsetWidth; cell.classList.add("pop");
+      }
+      var lgval = e >= 0 ? (e + "." + mant) : ((e - 1) + "." + mant);
+      out.innerHTML = v + "  →  归一化 " + m.toFixed(3) + "  →  查表行 <b>" + row + "</b> 列 <b>" + col +
+        "</b><br>首数 = <b>" + e + "</b>，尾数 = <b>." + mant + "</b>　⇒　lg " + v + " ≈ <b>" + lgval +
+        "</b>　（精确值 " + LG(v).toFixed(4) + "）";
+      out.classList.remove("pop"); void out.offsetWidth; out.classList.add("pop");
+    }
+    $("lkGo").onclick = lookup;
+    $("lkNum").onkeydown = function (ev) { if (ev.key === "Enter") lookup(); };
+    $("lkRand").onclick = function () {
+      var r = Math.random();
+      var v = r < .4 ? Math.round(Math.random() * 900 + 100)
+        : r < .7 ? +(Math.random() * 9 + 1).toFixed(2)
+          : +(Math.random() * 90000 + 1000).toFixed(0);
+      $("lkNum").value = v; lookup();
+    };
+  } catch (e) { console.warn("lookup", e); }
+
+  /* ============ 5. 分贝计算器 ============ */
+  try {
+    var anchors = [[0, "刚好听见的门槛"], [20, "耳语"], [30, "安静的图书馆"], [40, "冰箱嗡嗡声"], [60, "正常说话"],
+    [70, "吸尘器"], [85, "繁忙马路"], [90, "汽车鸣笛"], [100, "电钻"], [110, "摇滚演唱会"], [120, "喷气机起飞"], [130, "疼痛极限"]];
+    function near(db) {
+      var best = anchors[0], bd = 1e9;
+      anchors.forEach(function (a) { var d = Math.abs(a[0] - db); if (d < bd) { bd = d; best = a; } });
+      return bd <= 6 ? "（≈ " + best[1] + "）" : "";
+    }
+    function dbUpdate(extra) {
+      var db = +$("dbR").value;
+      $("dbV").textContent = db;
+      var mult = Math.pow(10, db / 10);
+      var html = db + " dB　⇒　强度 = 基准 × 10^" + (db / 10).toFixed(1) + " = <b>×" + sci(mult) + "</b>　" + near(db);
+      html += '<div style="margin-top:8px;background:#e0e7ff;border-radius:6px;height:16px;position:relative;overflow:hidden">' +
+        '<div style="position:absolute;left:0;top:0;bottom:0;width:' + (db / 130 * 100).toFixed(1) +
+        '%;background:linear-gradient(90deg,#34d399,#fbbf24,#ef4444);transition:width .3s"></div></div>' +
+        '<div style="font-size:12px;color:#666;margin-top:3px">← 0 dB　　　　　　　　　　　　130 dB →（注意：滑块走的是“对数”，真实强度是指数爆炸）</div>';
+      if (extra) html += '<div style="margin-top:8px;color:#e11d48;font-weight:bold">' + extra + "</div>";
+      $("dbOut").innerHTML = html;
+    }
+    $("dbR").oninput = function () { dbUpdate(); };
+    $("dbTwo").onclick = function () {
+      var db = +$("dbR").value;
+      var c = 10 * LG(2 * Math.pow(10, db / 10));
+      dbUpdate(db + " dB + " + db + " dB = <b>" + c.toFixed(1) + " dB</b>，不是 " + (db * 2) + " dB！因为能量只 ×2，对数只 +lg2×10 ≈ +3");
+    };
+    dbUpdate();
+  } catch (e) { console.warn("db", e); }
+})();
+
+</script>
+</body></html>

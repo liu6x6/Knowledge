@@ -85,7 +85,7 @@
 <body>
     <main>
         <h1>Knowledge</h1>
-        <p class="subtitle">仓库中的网页目录</p>
+        <p class="subtitle">仓库中的 HTML 与 Markdown 网页目录</p>
         <p id="status" role="status">正在加载网页列表…</p>
         <ul id="pages"></ul>
     </main>
@@ -102,7 +102,11 @@
         }
 
         function displayName(path) {
-            return path.replace(/\.(html?|HTML?)$/, "").replaceAll("-", " ");
+            return path.replace(/\.(html?|md)$/i, "").replaceAll("-", " ");
+        }
+
+        function publishedPath(path) {
+            return path.replace(/\.md$/i, ".html");
         }
 
         async function loadPages() {
@@ -120,8 +124,17 @@
                 throw new Error("仓库文件过多，无法完成索引");
             }
 
-            const pages = tree
-                .filter(({ type, path }) => type === "blob" && /\.html?$/i.test(path) && path !== "index.html")
+            const pageByURL = tree
+                .filter(({ type, path }) => type === "blob" && /\.(html?|md)$/i.test(path))
+                .filter(({ path }) => path !== "index.html" && path !== "index.md")
+                .map(({ path }) => ({ path, url: publishedPath(path) }))
+                .reduce((pages, page) => {
+                    if (!pages.has(page.url) || /\.html?$/i.test(page.path)) {
+                        pages.set(page.url, page);
+                    }
+                    return pages;
+                }, new Map());
+            const pages = [...pageByURL.values()]
                 .sort((first, second) => first.path.localeCompare(second.path, "zh-CN"));
 
             if (pages.length === 0) {
@@ -129,10 +142,10 @@
                 return;
             }
 
-            for (const { path } of pages) {
+            for (const { path, url } of pages) {
                 const item = document.createElement("li");
                 const link = document.createElement("a");
-                link.href = pageURL(path);
+                link.href = pageURL(url);
                 link.textContent = displayName(path);
                 item.append(link);
                 pagesElement.append(item);
